@@ -16425,7 +16425,16 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
     display: flex;
     align-items: center;
 }
-
+.page-header3 {
+    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+}
 .page-header2 {
     height: 100vh;
     background-position: center center;
@@ -17231,8 +17240,13 @@ footer .pull-center {
     overflow: hidden;
 }
 
+.index-page .page-header3 {
+    height: 1000px;
+    overflow: scroll;
+}
+
 .index-page .brand {
-    color: #fff;
+    color: #000000	;
     margin-bottom: 50px;
     text-align: center;
     width: 150%;
