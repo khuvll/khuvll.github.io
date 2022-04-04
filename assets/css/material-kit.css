@@ -16427,7 +16427,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 .page-header3 {
     height: 100vh;
-    /* background-position: center center; */
+    background-position: center center;
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -17246,7 +17246,7 @@ footer .pull-center {
 }
 
 .index-page .brand {
-    color: #fff;
+    color: #000000	;
     margin-bottom: 50px;
     text-align: center;
     width: 150%;
