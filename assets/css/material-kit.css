@@ -17242,11 +17242,11 @@ footer .pull-center {
 
 .index-page .page-header3 {
     height: 1000px;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .index-page .brand {
-    color: #000000	;
+    color: #FFFFFF	;
     margin-bottom: 50px;
     text-align: center;
     width: 150%;
@@ -17254,7 +17254,7 @@ footer .pull-center {
 }
 
 .index-page .brand h1 {
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 400;
     display: inline-block;
     position: relative;
