@@ -15,10 +15,44 @@
     <link rel="stylesheet" type="text/css" target="_blank" href="https://fonts.googleapis.com/css?family=Open+Sans:+400,500,600,700|Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="./assets/css/material-kit.css?v=2.0.2">
-    <!-- Documentation extras -->
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <!-- <link href="./assets/assets-for-demo/demo.css" rel="stylesheet" /> -->
-    <!-- iframe removal -->
+
+    <!-- Global CSS Variables -->
+    <style>
+        :root {
+            --section-title-font-size: x-large; /* 섹션 제목 폰트 크기 (40px) */
+            --section-title-font-weight: 900; /* 섹션 제목 폰트 굵기 (bold 설정) */
+            --section-margin: -2em; /* 섹션 간 간격 */
+            --image-width: 80%; /* 이미지 너비 */
+            --image-margin-bottom: 0.8em; /* 이미지 하단 간격 */
+            --text-font-size: large; /* 텍스트 크기 */
+            --text-font-weight: 600; /* 텍스트 굵기 */
+            --section-title-bg: #f0f0f0; /* 섹션 제목 배경색 */
+            --section-title-padding: 0.5em; /* 섹션 제목 여백 */
+        }
+
+        .section {
+            margin-bottom: var(--section-margin); /* 섹션 간 간격 */
+        }
+
+        .section .title {
+            background-color: var(--section-title-bg);
+            padding: var(--section-title-padding);
+            margin-bottom: 1em;
+            text-align: center;
+            font-size: var(--section-title-font-size) !important; /* 강제 적용 */
+            font-weight: var(--section-title-font-weight) !important; /* 강제 적용 */
+        }
+        .section img {
+            width: var(--image-width); /* 이미지 너비 */
+            height: auto; /* 이미지 비율 유지 */
+            margin-bottom: var(--image-margin-bottom); /* 이미지와 텍스트 간 간격 */
+        }
+
+        .section p {
+            font-size: var(--text-font-size); /* 텍스트 크기 */
+            font-weight: var(--text-font-weight); /* 텍스트 굵기 */
+        }
+    </style>
 </head>
 
 <body class="index-page">
@@ -37,46 +71,94 @@
         </div>
     </div>
 
-
     <div class="main main-raised">
-        <div class="container" style="margin-bottom: 1em;">
-            <div class="title" style="margin-bottom: 2em;">
-                <h3>Research Interest</h3>
+        <div class="container">
+            <div class="title" style="margin-bottom: var(--section-margin);">
+                <h4 style="font-size: xx-large; font-weight: 900;">Research Interest</h4>
                 <hr>
             </div>
 
-            <div class="title" style="margin-bottom: -1em;">
-                <p style="font-size: xx-large; font-weight: 900;">Video Understanding</p>
+            <!-- Video Understanding Section -->
+            <div class="section">
+                <div class="title">
+                    <h4 style="font-size: var(--section-title-font-size); font-weight: var(--section-title-font-weight);"></h4>Video Understanding</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/temp.jpg" alt="Video Representation Learning">
+                        <p>Video Representation Learning</p>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/temp.jpg" alt="Human Action Recognition">
+                        <p>Human Action Recognition</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/temp.jpg" alt="Long-Term Temporal Context Modeling">
+                        <p>Long-Term Temporal Context Modeling</p>
+                    </div>
+                </div>
             </div>
 
-            <p style="margin-top: 2em; font-size: large;"><li>Video Representation Learning</li></p>
-            <p style="margin-top: 2em; font-size: large;"><li>Human Action Recognition</li></p>
-            <p style="margin-top: 2em; font-size: large;"><li>Long-Term Temporal Context Modeling</li></p>
-            
-            <div class="title" style="margin-bottom: -1em; margin-top: 2em;">
-                <p style="font-size: xx-large; font-weight: 900;">Learning with Limited Supervision</p>
-
+            <!-- Learning with Limited Supervision Section -->
+            <div class="section">
+                <div class="title">
+                    <h4 style="font-size: var(--section-title-font-size); font-weight: var(--section-title-font-weight);"></h4>Learning with Limited Supervision</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/temp.jpg" alt="Unsupervised/Self-Supervised Learning">
+                        <p>Unsupervised/Self-Supervised Learning</p>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/temp.jpg" alt="Semi-Supervised Learning">
+                        <p>Semi-Supervised Learning</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/temp.jpg" alt="Category Discovery">
+                        <p>Category Discovery</p>
+                    </div>
+                </div>
             </div>
 
-            <p style="margin-top: 2em; font-size: large;"><li>Unsupervised/Self-Supervised Learning</li></p>
-            <p style="margin-top: 2em; font-size: large;"><li>Semi-Supervised Learning</li></p>
-            <p style="margin-top: 2em; font-size: large;"><li>Category Discovery</li></p>
-
-            <div class="title" style="margin-bottom: -1em; margin-top: 2em;">
-                <p style="font-size: xx-large; font-weight: 900;">Adaptation/Robustness</p>
+            <!-- Adaptation/Robustness Section -->
+            <div class="section">
+                <div class="title">
+                    <h4 style="font-size: var(--section-title-font-size); font-weight: var(--section-title-font-weight);"></h4>Adaptation/Robustness</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/temp.jpg" alt="Unsupervised Domain Adaptation">
+                        <p>Unsupervised Domain Adaptation</p>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/temp.jpg" alt="Continual Learning">
+                        <p>Continual Learning</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/temp.jpg" alt="Domain Generalization">
+                        <p>Domain Generalization</p>
+                    </div>
+                </div>
             </div>
 
-            <p style="margin-top: 2em; font-size: large;"><li>Unsupervised Domain Adaptation</li></p>
-            <p style="margin-top: 2em; font-size: large;"><li>Continual Learning</li></p>
-            <p style="margin-top: 2em; font-size: large;"><li>Domain Generalization</li></p>
-
-            <div class="title" style="margin-bottom: -1em; margin-top: 2em;">
-                <p style="font-size: xx-large; font-weight: 900;">Multi-Modal Learning</p>
+            <!-- Multi-Modal Learning Section -->
+            <div class="section">
+                <div class="title">
+                    <h4 style="font-size: var(--section-title-font-size); font-weight: var(--section-title-font-weight);"></h4>Multi-Modal Learning</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/ca2st.png" alt="Visual + Audio + Text">
+                        <p>Visual + Audio + Text</p>
+                    </div>
+                </div>
             </div>
-
-            <p style="margin-top: 2em; font-size: large;"><li>Visual + Audio + Text</li></p>
-
-
 
             <!-- <h5 style="margin-top: 1em; margin-bottom: 0.5em; font-weight: 400;">For Korean students</h5>
             <li>Refer to the <a href="https://www.gist.ac.kr/gadm/html/sub04/0401.html?mode=V&no=197636" target="_new">school's application direction</a></li>
@@ -132,7 +214,7 @@
     <!-- Fixed Sidebar Nav - js With initialisations For Demo Purpose, Don't Include it in your project -->
     <script src="./assets/assets-for-demo/js/material-kit-demo.js"></script>
     <!-- including html -->
-    <script src="./assets/js/include-html.js"></script>    
+    <script src="./assets/js/include-html.js"></script>
     <script>
         $(document).ready(function() {
 

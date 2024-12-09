@@ -15,11 +15,64 @@
     <link rel="stylesheet" type="text/css" target="_blank" href="https://fonts.googleapis.com/css?family=Open+Sans:+400,500,600,700|Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/css/material-kit.css?v=2.0.2">
-    <!-- Documentation extras -->
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <!-- <link href="./assets/assets-for-demo/demo.css" rel="stylesheet" /> -->
-    <!-- iframe removal -->
+
+    <!-- Custom Styles -->
+    <style>
+      :root {
+          --image-width: 200px; /* 이미지 너비 */
+          --image-margin: 20px; /* 이미지와 텍스트 간 간격 */
+          --card-padding: 1em; /* 카드 내부 여백 */
+      }
+  
+      /* 이미지 스타일 */
+      .card-pic-left {
+          width: var(--image-width); /* 이미지 너비 */
+          height: auto; /* 비율을 유지하며 이미지 크기 조정 */
+          margin-right: var(--image-margin); /* 이미지와 텍스트 간격 */
+          float: left; /* 이미지를 텍스트 왼쪽에 배치 */
+          display: block; /* 이미지가 텍스트 위에 올라가지 않도록 설정 */
+      }
+  
+      /* 카드 레이아웃 */
+      .card-body {
+          overflow: auto; /* float로 인해 텍스트가 이미지 아래로 내려가지 않도록 */
+          padding: var(--card-padding); /* 카드 내부 여백 */
+          background-color: rgb(253, 253, 253); /* 카드 배경색 */
+          margin-bottom: 20px; /* 카드 간 간격 */
+      }
+  
+      /* 텍스트 스타일 */
+      .card-title {
+          font-size: 18px;
+          font-weight: bold;
+          margin-top: 0;
+          margin-bottom: 10px;
+      }
+  
+      .card-text {
+          margin: 0;
+          line-height: 1.5; /* 가독성을 위한 줄 간격 */
+      }
+  
+      .card-subtitle {
+          margin-top: 10px;
+          color: gray;
+      }
+  
+      /* 연도 제목 */
+      .year-pub {
+          font-size: 24px;
+          font-weight: bold;
+          margin-top: 80px;
+          margin-bottom: 30px;
+          color: #333;
+      }
+  </style>
+  
 </head>
+
+
+
 
 <body class="index-page">
     <nav class="navbar navbar-color-on-scroll navbar-transparent navbar-light fixed-top navbar-expand-lg " color-on-scroll="0" id="sectionsNav">
@@ -41,7 +94,9 @@
     <div class="main main-raised">
         <div class="container">
             <div class="title" style="margin-bottom: -1em;">
-                <h3>Publications</h3><br>
+              <h4 style="font-size: xx-large; font-weight: 900;">Publications</h4>
+                <!-- <h3>Publications</h3> -->
+                <hr>
                 <span style="font-size : 9pt;">* indicates corresponding author</span><br>
                 <span style="font-size : 9pt;">† indicates equally contributed first authors</span>
             </div>
@@ -94,7 +149,7 @@
                   <source src="assets/img/pub/ECCV_2024_DEVIAS.mp4" type="video/mp4">
                   Your browser does not support the video tag.
               </video> -->
-              <img class="card-pic-left" src="assets/img/pub/DEVIAS_thumbnail.gif" width=120px height = 120px>
+              <img class="card-pic-left" src="assets/img/pub/DEVIAS_thumbnail.gif" width=120px height = 120px style="margin:1em 2em 1em -1em">
                 <h4 class="card-title" style="margin-top: -0.1em;"> DEVIAS: Learning Disentangled Video Representations of Action and Scene</h4>
                 <p class="card-text"><b>Kyungho Bae<sup>†</sup></b>, <b>Geo Ahn<sup>†</sup></b>, Youngrae Kim<sup>†</sup>, <b>Jinwoo Choi<sup>*</sup></b></p>
                 <p class="card-subtitle mb-2 text-muted">European Conference on Computer Vision <b>(ECCV) Oral (2.3% acceptance rate)</b>, 2024</p>
