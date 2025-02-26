@@ -34,6 +34,10 @@
             margin-bottom: var(--section-margin); /* 섹션 간 간격 */
         }
 
+        .section + .section {
+            margin-top: -5em; /* 다음 섹션 타이틀과 이전 섹션 마지막 글자 간격 줄이기 */
+        }
+
         .section .title {
             background-color: var(--section-title-bg);
             padding: var(--section-title-padding);
@@ -42,12 +46,20 @@
             font-size: var(--section-title-font-size) !important; /* 강제 적용 */
             font-weight: var(--section-title-font-weight) !important; /* 강제 적용 */
         }
+        .row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center; /* 텍스트와 이미지의 높이 맞추기 */
+        }
         .section img {
             width: var(--image-width); /* 이미지 너비 */
             height: auto; /* 이미지 비율 유지 */
             margin-bottom: var(--image-margin-bottom); /* 이미지와 텍스트 간 간격 */
         }
-
+        
+        .col-md-6 p {
+            margin-bottom: 1.2em; /* 텍스트와 다음 이미지 간격 추가 */
+        }
         .section p {
             font-size: var(--text-font-size); /* 텍스트 크기 */
             font-weight: var(--text-font-weight); /* 텍스트 굵기 */
@@ -85,12 +97,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/video_action_recognition.png" alt="Video Representation Learning">
+                        <img src="./assets/img/research/video_representation_learning.png" alt="Video Representation Learning">
                         <p>Video Representation Learning</p>
                     </div>
                     <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/human_action_recognition.png" alt="Human Action Recognition">
-                        <p>Human Action Recognition</p>
+                        <img src="./assets/img/research/cross-modal_video_captioning.png" alt="Long-Term Temporal Context Modeling">
+                        <p>Video Captioning</p>
                     </div>
                 </div>
                 <div class="row">
@@ -98,9 +110,12 @@
                         <img src="./assets/img/research/long-term_context_modeling.png" alt="Long-Term Temporal Context Modeling">
                         <p>Long-Term Temporal Context Modeling</p>
                     </div>
+                    <div class="col-md-6 text-center">
+                        <img src="./assets/img/research/sean_unsean_disentangle.png" alt="Human Action Recognition">
+                        <p>Human Action Recognition</p>
+                    </div>
                 </div>
             </div>
-
             <!-- Learning with Limited Supervision Section -->
             <div class="section">
                 <div class="title">
@@ -108,20 +123,20 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/selfsupervised_learning.png" alt="Unsupervised/Self-Supervised Learning">
+                        <img src="./assets/img/research/un_self_supervised_learning.png" alt="Unsupervised/Self-Supervised Learning">
                         <p>Unsupervised/Self-Supervised Learning</p>
                     </div>
                     <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/WACV_2020_Drone.gif" alt="Semi-Supervised Learning">
+                        <img src="./assets/img/research/semi_supervised_learning.png" alt="Semi-Supervised Learning">
                         <p>Semi-Supervised Learning</p>
                     </div>
                 </div>
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-md-6 text-center">
                         <img src="./assets/img/research/temp.jpg" alt="Category Discovery">
                         <p>Category Discovery</p>
                     </div>
-                </div> -->
+                </div>
             </div>
 
             <!-- Adaptation/Robustness Section -->
