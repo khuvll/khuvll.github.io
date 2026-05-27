@@ -5,633 +5,936 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <!-- Favicons -->
-    <!-- <link rel="apple-touch-icon" href="./assets/img/kit/free/apple-icon.png"> -->
     <link rel="icon" href="./assets/img/icon.png">
     <title>
       KHU Vision and Learning Lab.
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" target="_blank" href="https://fonts.googleapis.com/css?family=Open+Sans:+400,500,600,700|Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <!-- Fraunces serif (italic) — for hero tagline, matching timeblindness.github.io style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap">
     <link rel="stylesheet" target="_blank" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="./assets/css/material-kit.css?v=2.0.2">
-    <!-- Documentation extras -->
-    <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="./assets/assets-for-demo/demo.css" rel="stylesheet" />
-    <!-- iframe removal -->
+
+    <style>
+        /* ===== Navbar — light bg so the dark logo is visible, always solid ===== */
+        .navbar.navbar-transparent,
+        .navbar.navbar-transparent.bg-transparent,
+        .navbar {
+            padding-top: 12px !important;
+            padding-bottom: 12px !important;
+            background: rgba(255, 255, 255, 0.96) !important;
+            -webkit-backdrop-filter: saturate(180%) blur(12px);
+            backdrop-filter: saturate(180%) blur(12px);
+            box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            transition: padding 0.3s ease;
+        }
+        /* Keep solid on scroll — never fade away */
+        .navbar.navbar-transparent[color-on-scroll-active],
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98) !important;
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+        }
+        .navbar .navbar-nav { align-items: center; }
+        .navbar .navbar-nav .nav-item {
+            margin: 0 2px;
+        }
+        .navbar .navbar-nav .nav-item .nav-link {
+            color: #2c2c2c !important;
+            font-weight: 500;
+            font-size: 0.86rem;
+            letter-spacing: 0.4px;
+            padding: 10px 12px !important;
+            position: relative;
+            transition: color 0.25s ease;
+            white-space: nowrap;     /* prevent "Reading Group" / "Join us" from wrapping */
+        }
+        .navbar .navbar-nav .nav-item .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 12px; right: 12px; bottom: 4px;
+            height: 2px;
+            background: #c0392b;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+        .navbar .navbar-nav .nav-item .nav-link:hover,
+        .navbar .navbar-nav .nav-item .nav-link:focus {
+            color: #c0392b !important;
+            background: transparent !important;
+        }
+        .navbar .navbar-nav .nav-item .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+        .navbar .navbar-brand img {
+            max-height: 42px;
+            width: auto;
+            transition: max-height 0.3s ease;
+        }
+        .navbar.scrolled .navbar-brand img { max-height: 36px; }
+        /* Mobile toggler bars in dark color */
+        .navbar .navbar-toggler-icon { background-color: #2c2c2c !important; }
+        /* Force navbar to stay visible regardless of any other scripts */
+        .navbar.fixed-top {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: flex !important;
+        }
+        /* Push content down so nothing hides under the fixed navbar */
+        body.index-page { padding-top: 0; }
+
+        /* ============ Hero Carousel ============ */
+        .hero-section {
+            position: relative;
+            height: 94vh;
+            min-height: 760px;
+            overflow: hidden;
+            background-color: #1a2845;
+        }
+        /* Persistent backdrop — brighter, more vibrant, lab-feel */
+        .hero-backdrop {
+            position: absolute;
+            inset: 0;
+            background-image: url('./assets/img/maingate.jpg');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.08);
+            /* Softer filter — keep some life and color */
+            filter: saturate(0.7) brightness(0.78) contrast(1.05);
+            z-index: 0;
+        }
+        /* Vibrant gradient overlay — navy → teal → red echoes VLL colors */
+        .hero-backdrop::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(125deg,
+                    rgba(26, 54, 110, 0.78) 0%,
+                    rgba(36, 86, 132, 0.62) 35%,
+                    rgba(74, 53, 100, 0.62) 70%,
+                    rgba(140, 38, 50, 0.65) 100%),
+                radial-gradient(ellipse at 18% 32%, rgba(80, 160, 220, 0.22) 0%, rgba(0,0,0,0) 55%),
+                radial-gradient(ellipse at 82% 78%, rgba(220, 90, 100, 0.18) 0%, rgba(0,0,0,0) 55%);
+        }
+
+        /* Constant hero text overlay */
+        .hero-content {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            pointer-events: none;
+        }
+        .hero-content > .hero-inner { pointer-events: auto; }
+        .hero-content .hero-inner {
+            max-width: 1080px;
+            width: 100%;
+            animation: heroFadeUp 1.1s ease-out;
+        }
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Fraunces (upright) — based on timeblindness .sub, scaled up for hero */
+        .hero-content h1,
+        body.index-page .hero-content h1 {
+            font-family: 'Fraunces', Georgia, serif !important;
+            font-size: clamp(2rem, 5vw, 3.8rem) !important;
+            line-height: 1.15 !important;
+            letter-spacing: -0.5px !important;
+            color: #fff !important;
+            font-weight: 500 !important;
+            font-style: normal !important;
+            max-width: 920px;
+            margin: 0 auto 0.6em !important;
+            font-variation-settings: "opsz" 96 !important;
+            text-shadow: 0 2px 18px rgba(0,0,0,0.6);
+            text-wrap: balance;
+        }
+        .hero-content h3 {
+            font-weight: 300;
+            font-size: 1.2rem;
+            margin-bottom: 2em;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+            color: #e8eaf0;
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(192,57,43,0.85) 0%, rgba(155,29,32,0.85) 100%);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(192,57,43,0.35);
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 4px 18px rgba(192,57,43,0.35); }
+            50%      { box-shadow: 0 4px 28px rgba(192,57,43,0.55); }
+        }
+
+        /* ===== Research showcase carousel (paper highlight cards) ===== */
+        .hero-carousel {
+            max-width: 1120px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .hero-carousel .carousel-inner {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+        }
+        /* Cross-fade transition — much smoother than slide */
+        .hero-carousel.carousel-fade .carousel-item {
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            transform: none !important;
+            will-change: opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        .hero-carousel.carousel-fade .carousel-item.active,
+        .hero-carousel.carousel-fade .carousel-item-next.carousel-item-left,
+        .hero-carousel.carousel-fade .carousel-item-prev.carousel-item-right {
+            opacity: 1;
+        }
+        .hero-carousel.carousel-fade .carousel-item-left.active,
+        .hero-carousel.carousel-fade .carousel-item-prev.carousel-item-right.active {
+            opacity: 0;
+        }
+        .hero-carousel.carousel-fade .active.carousel-item-left,
+        .hero-carousel.carousel-fade .active.carousel-item-right {
+            transition: opacity 1.2s ease-in-out;
+        }
+
+        /* Each slide is a horizontal research card */
+        .paper-showcase {
+            display: flex;
+            align-items: stretch;
+            background: rgba(15,21,35,0.78);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 18px;
+            min-height: 340px;
+            overflow: hidden;
+        }
+        /* Image area uses CONTAIN so full image is visible regardless of aspect ratio */
+        .paper-showcase .ps-image {
+            flex: 0 0 52%;
+            min-height: 340px;
+            background-color: #0e1424;
+            background-image:
+                radial-gradient(ellipse at center, rgba(56,98,160,0.12) 0%, rgba(0,0,0,0) 70%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .paper-showcase .ps-image-inner {
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+        }
+        .paper-showcase .ps-info {
+            flex: 1;
+            padding: 30px 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            border-left: 3px solid #e63946;
+        }
+        .paper-showcase .ps-venue {
+            font-size: 0.78rem;
+            color: #ffd166;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .paper-showcase .ps-title {
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 1.45;
+            margin-bottom: 20px;
+        }
+        .paper-showcase .ps-link {
+            color: #ffd166;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.25s, transform 0.25s;
+            align-self: flex-start;
+        }
+        .paper-showcase .ps-link:hover {
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        /* Carousel controls — placed outside the card */
+        .hero-carousel .carousel-control-prev,
+        .hero-carousel .carousel-control-next {
+            width: 44px;
+            height: 44px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            opacity: 0.85;
+            transition: opacity 0.25s, background 0.25s;
+            z-index: 10;
+        }
+        .hero-carousel .carousel-control-prev { left: -60px; }
+        .hero-carousel .carousel-control-next { right: -60px; }
+        .hero-carousel .carousel-control-prev:hover,
+        .hero-carousel .carousel-control-next:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+        .hero-carousel .carousel-indicators {
+            z-index: 10;
+            bottom: -36px;
+            margin: 0;
+        }
+        .hero-carousel .carousel-indicators li {
+            width: 28px;
+            height: 3px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            margin: 0 4px;
+            transition: background 0.3s, width 0.3s;
+        }
+        .hero-carousel .carousel-indicators .active {
+            background: #ffd166;
+            width: 40px;
+        }
+
+        @media (max-width: 1200px) {
+            .hero-carousel { max-width: 94%; }
+            .hero-carousel .carousel-control-prev { left: -20px; }
+            .hero-carousel .carousel-control-next { right: -20px; }
+        }
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 2rem; }
+            .paper-showcase { min-height: 300px; }
+            .paper-showcase .ps-image { min-height: 300px; flex: 0 0 48%; }
+            .paper-showcase .ps-title { font-size: 1.1rem; }
+        }
+        @media (max-width: 768px) {
+            .hero-section { min-height: 820px; }
+            .hero-content { padding: 80px 16px 40px; }
+            .hero-content h1 { font-size: 1.55rem; }
+            .hero-content h3 { font-size: 0.95rem; margin-bottom: 1.4em; }
+            .paper-showcase {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .paper-showcase .ps-image {
+                flex: 0 0 220px;
+                min-height: 220px;
+                width: 100%;
+                padding: 12px;
+            }
+            .paper-showcase .ps-info {
+                border-left: none;
+                border-top: 3px solid #e63946;
+                padding: 20px 22px;
+            }
+            .paper-showcase .ps-title { font-size: 1rem; }
+            .hero-carousel .carousel-control-prev,
+            .hero-carousel .carousel-control-next { display: none; }
+            .navbar .navbar-nav .nav-item { margin: 0; }
+            .navbar .navbar-nav .nav-item .nav-link { padding: 8px 12px !important; letter-spacing: 1px; }
+        }
+
+        /* ============ Stats Dashboard ============ */
+        .stats-section {
+            padding: 60px 0 40px 0;
+            background:
+                linear-gradient(135deg, #f7faff 0%, #ffffff 50%, #fef5f5 100%);
+            position: relative;
+        }
+        .stats-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a3668 0%, #c0392b 100%);
+        }
+        .stats-section .section-title {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .stats-section .section-title h3 {
+            font-weight: 700;
+            color: #1a2845;
+            margin-bottom: 6px;
+            font-size: 1.8rem;
+        }
+        .stats-section .section-title p {
+            color: #6b7280;
+            font-size: 0.98rem;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 32px 18px;
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(26,40,69,0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 22px;
+            height: 100%;
+            border-top: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--accent, #c0392b);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.45s ease;
+        }
+        .stat-card:hover::before { transform: scaleX(1); }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 36px rgba(26,40,69,0.14);
+        }
+        .stat-card.s1 { --accent: #c0392b; }
+        .stat-card.s2 { --accent: #f39c12; }
+        .stat-card.s3 { --accent: #16a085; }
+        .stat-card.s4 { --accent: #2980b9; }
+        .stat-icon {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            display: inline-flex;
+            width: 64px; height: 64px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.04);
+        }
+        .stat-card.s1 .stat-icon { color: #c0392b; background: rgba(192,57,43,0.1); }
+        .stat-card.s2 .stat-icon { color: #f39c12; background: rgba(243,156,18,0.1); }
+        .stat-card.s3 .stat-icon { color: #16a085; background: rgba(22,160,133,0.1); }
+        .stat-card.s4 .stat-icon { color: #2980b9; background: rgba(41,128,185,0.1); }
+        .stat-number {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #222;
+            line-height: 1;
+            margin-bottom: 6px;
+            font-family: 'Roboto Slab', serif;
+        }
+        .stat-label {
+            font-size: 0.95rem;
+            color: #555;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .stat-sublabel {
+            font-size: 0.78rem;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        /* ============ News Section ============ */
+        .news-section { padding: 30px 0 50px 0; }
+        .news-section .title h2 { font-weight: 700; }
+
+        .news-year {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #444;
+            margin: 24px 0 14px 0;
+            border-bottom: 2px solid #e63946;
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+        .news-card {
+            width: 100%;
+            margin-bottom: 14px;
+            border-left: 4px solid #e63946;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .news-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .news-card:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+        }
+        .news-card .card-body { padding: 18px 22px; }
+        .news-card .card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .news-card .card-text { font-size: 0.95rem; color: #444; }
+
+        .news-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            color: #fff;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+        .badge-neurips { background: #6b21a8; }
+        .badge-iccv    { background: #1d4ed8; }
+        .badge-cvpr    { background: #b91c1c; }
+        .badge-bmvc    { background: #b45309; }
+        .badge-tpami   { background: #115e59; }
+        .badge-eccv    { background: #0e7490; }
+        .badge-aaai    { background: #475569; }
+        .badge-grant   { background: #047857; }
+        .badge-press   { background: #db2777; }
+        .badge-member  { background: #64748b; }
+        .badge-misc    { background: #334155; }
+
+        .news-date {
+            font-size: 0.78rem;
+            color: #777;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .news-more-btn {
+            display: block;
+            margin: 24px auto 0 auto;
+            padding: 10px 32px;
+            background: #fff;
+            border: 2px solid #e63946;
+            color: #e63946;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .news-more-btn:hover {
+            background: #e63946;
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(230,57,70,0.3);
+        }
+        .news-hidden { display: none; }
+
+        /* Section divider */
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: #e63946;
+            margin: 12px auto 0 auto;
+            border-radius: 2px;
+        }
+    </style>
 </head>
 
 <body class="index-page">
-    <nav class="navbar navbar-color-on-scroll navbar-transparent navbar-light fixed-top navbar-expand-lg " color-on-scroll="0" id="sectionsNav">
+    <nav class="navbar navbar-color-on-scroll navbar-transparent navbar-light fixed-top navbar-expand-lg" color-on-scroll="0" id="sectionsNav">
         <div w3-include-html="header.html" class="container"></div>
     </nav>
 
-<!--     <div class="page-header3 header-filter clear-filter" data-parallax="true" style="background-image: url('./assets/img/maingate.jpg'); background-position-y: -50px;"> -->
-    <div class="page-header3 header-filter clear-filter" data-parallax="true"
-     style="background-image: url('./assets/img/maingate.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;">
-      <div class="container">
-          <div class="row">
-              <div class="col-md-8 ml-auto mr-auto">
-                  <div class="brand">
-                      <h2>We pursue high-impact and original research in vision and learning</h2>
-                      <h3>We read, code, discuss, and write about computer vision and machine learning</h3>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+    <!-- ============ HERO SECTION ============ -->
+    <div class="hero-section">
+        <!-- Persistent lab-themed backdrop (never changes) -->
+        <div class="hero-backdrop"></div>
+
+        <!-- Constant text + Research showcase carousel -->
+        <div class="hero-content">
+            <div class="hero-inner">
+                <h1>We pursue high-impact and original research in vision and learning</h1>
+                <h3>We read, code, discuss, and write about computer vision and machine learning</h3>
+
+                <!-- Carousel of paper highlight cards (smooth cross-fade) -->
+                <div id="heroCarousel" class="carousel slide carousel-fade hero-carousel" data-ride="carousel" data-interval="6000" data-pause="hover">
+                    <div class="carousel-inner">
+                        <!-- Slide 1: NeurIPS 2025 Spotlight -->
+                        <div class="carousel-item active">
+                            <div class="paper-showcase">
+                                <div class="ps-image">
+                                    <div class="ps-image-inner" style="background-image: url('./assets/img/pub/NeurIPS_2025_DANCE.gif');"></div>
+                                </div>
+                                <div class="ps-info">
+                                    <div class="ps-venue">NeurIPS 2025 · Spotlight (3.5%)</div>
+                                    <div class="ps-title">Disentangled Concepts Speak Louder Than Words: Explainable Video Action Recognition</div>
+                                    <a class="ps-link" href="https://jong980812.github.io/DANCE/" target="_blank">Learn more &nbsp;<i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 2: ICCV 2025 Highlight -->
+                        <div class="carousel-item">
+                            <div class="paper-showcase">
+                                <div class="ps-image">
+                                    <div class="ps-image-inner" style="background-image: url('./assets/img/pub/ESSENTIAL.png');"></div>
+                                </div>
+                                <div class="ps-info">
+                                    <div class="ps-venue">ICCV 2025 · Highlight (2.9%)</div>
+                                    <div class="ps-title">ESSENTIAL: Episodic and Semantic Memory Integration for Video Class-Incremental Learning</div>
+                                    <a class="ps-link" href="https://jong980812.github.io/ESSENTIAL/" target="_blank">Learn more &nbsp;<i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 3: CVPR 2025 Highlight -->
+                        <div class="carousel-item">
+                            <div class="paper-showcase">
+                                <div class="ps-image">
+                                    <div class="ps-image-inner" style="background-image: url('./assets/img/pub/2025_CVPR_MASH-VLM.png');"></div>
+                                </div>
+                                <div class="ps-info">
+                                    <div class="ps-venue">CVPR 2025 · Highlight (3.7%)</div>
+                                    <div class="ps-title">MASH-VLM: Mitigating Action-Scene Hallucination in Video-LLMs through Disentangled Spatial-Temporal Representations</div>
+                                    <a class="ps-link" href="https://arxiv.org/abs/2503.15871" target="_blank">Learn more &nbsp;<i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 4: BMVC 2025 Oral -->
+                        <div class="carousel-item">
+                            <div class="paper-showcase">
+                                <div class="ps-image">
+                                    <div class="ps-image-inner" style="background-image: url('./assets/img/pub/BMVC2025_HERO-VQL.jpg');"></div>
+                                </div>
+                                <div class="ps-info">
+                                    <div class="ps-venue">BMVC 2025 · Oral (3.8%)</div>
+                                    <div class="ps-title">HERO-VQL: Hierarchical, Egocentric and Robust Visual Query Localization</div>
+                                    <a class="ps-link" href="https://joohyunchang.github.io/HERO-VQL/" target="_blank">Learn more &nbsp;<i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 5: TPAMI 2026 -->
+                        <div class="carousel-item">
+                            <div class="paper-showcase">
+                                <div class="ps-image">
+                                    <div class="ps-image-inner" style="background-image: url('./assets/img/pub/2025_TPAMI_CA2ST.png');"></div>
+                                </div>
+                                <div class="ps-info">
+                                    <div class="ps-venue">IEEE TPAMI 2026 · IF 18.6</div>
+                                    <div class="ps-title">CA²ST: Cross-Attention in Audio, Space, and Time for Holistic Video Recognition</div>
+                                    <a class="ps-link" href="https://arxiv.org/abs/2503.23447" target="_blank">Learn more &nbsp;<i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 6: CVPRW 2025 Spotlight -->
+                        <div class="carousel-item">
+                            <div class="paper-showcase">
+                                <div class="ps-image">
+                                    <div class="ps-image-inner" style="background-image: url('./assets/img/pub/2025_CVPRW_PCBEAR.png');"></div>
+                                </div>
+                                <div class="ps-info">
+                                    <div class="ps-venue">CVPR 2025 Workshop · Spotlight</div>
+                                    <div class="ps-title">PCBEAR: Pose Concept Bottleneck for Explainable Action Recognition</div>
+                                    <a class="ps-link" href="https://arxiv.org/abs/2504.13140" target="_blank">Learn more &nbsp;<i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+                    <ol class="carousel-indicators">
+                        <li data-target="#heroCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#heroCarousel" data-slide-to="1"></li>
+                        <li data-target="#heroCarousel" data-slide-to="2"></li>
+                        <li data-target="#heroCarousel" data-slide-to="3"></li>
+                        <li data-target="#heroCarousel" data-slide-to="4"></li>
+                        <li data-target="#heroCarousel" data-slide-to="5"></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="main main-raised">
-        <div class="container">
 
-
-    <div class="row">
-
-      <!-- <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-        <div class="card-body">
-          <h4 class="card-title">
-          💡 We are hiring motivated undergraduate interns for Fall 2024! 
-          <a href="./joinus.html" style="font-size: 1em;">[Click for Detail]</a>
-          </h4>
-        </div>
-      </div>  -->
-    </div> 
-
-    <br>
-
-    <div class="title">
-                <h2>News</h2>
-      </div>
-
-      2025
-      <div class="row">
-    <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">2025 Publication Summary                 <br></h4>
-            <p class="card-text">In 2025, we have got 1 <strong style="color: red;">NeurIPS spotlight</strong>, 1 <strong style="color: red;">ICCV highlight</strong>, 1 <strong style="color: red;">CVPR highlight</strong>, 1 <strong style="color: red;">CVPR Workshop spotlight</strong>, and 1 <strong style="color: red;">BMVC oral</strong>, and 1 <strong style="color: red;">TPAMI</strong> papers, all first-authored by KHU VLL students.<br>
-                 In other words, <strong style="color: red;">all five papers first-authored by KHU VLL students are oral/highlight/spotlight or TPAMI papers.</strong> <br>
-                 We also have 1 AAAI and 1 CVPR poster papers first-authored by students from other labs.<br>
-                 For more details, refer to the <a href="https://vll.khu.ac.kr/pub.html">Publication page</a>.
-            </p>
-          </div>
-        </div>       
-          
-          <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Sep. 2025:                      <br></h4>
-            <p class="card-text">Our work on video explainable AI is accepted as an <strong style="color: red;">Spotlight paper</strong> of NeurIPS 2025. <br>
-                 "Disentangled Concepts Speak Louder Than Words: Explainable Video Action Recognition" <br>
-                 Jongseo, big congratulations! Now you know how to conduct high-impact research!
-            </p>
-          </div>
-        </div>       
-          
-    <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Aug. 2025:                      <br></h4>
-            <p class="card-text">A grant proposal, “Explainable and Robust Multi-modal Long-form Video Understanding with Life-long Learning (RS-2025-22362968)” has been accepted by NRF, Korea.<br>
-              Jinwoo Choi is the PI of the grant. <br>
-            </p>
-          </div>
-        </div>     
-          
-    <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Aug. 2025:                      <br></h4>
-            <p class="card-text"> Press Coverage: Our recent work, MASH-VLM (CVPR 2025 Highlight) has been featured in Digital Chosun Ilbo (August 4, 2025). <br>
-                <a href="https://digitalchosun.dizzo.com/site/data/html_dir/2025/08/04/2025080480231.html#">Digital Chosun Ilbo Article</a>
-            </p>
-          </div>
-        </div>  
-          
-      <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jul. 2025:                      <br></h4>
-            <p class="card-text">Our work on Egocentric Visual Query Localization (VQ2D of Ego4D) is accepted as an <strong style="color: red;">Oral paper</strong> of BMVC 2025. <br>
-                 "HERO-VQL: Hierarchical, Egocentric and Robust Visual Query Localization" <br>
-                 Congratulations to Hyogun, Soyeon, and Joohyun on their first oral paper!
-            </p>
-          </div>
-        </div>       
-          
-      <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jul. 2025:                      <br></h4>
-            <p class="card-text">Our work on Video Continual Learning is selected as a <strong style="color: red;">Highlight presentation</strong> of ICCV 2025. <br>
-                 "ESSENTIAL: Episodic and Semantic Memory Integration for Video Class-Incremental Learning" <br>
-                 Congratulations to Jongseo and Kyungho on this well-deserved recognition!
-            </p>
-          </div>
-        </div>       
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">May 2025:                      <br></h4>
-            <p class="card-text">A grant proposal, “Multi-Purpose Visual Information Coding for Human and Machine Vision <br>
-              (인간과 기계 시각을 동시에 지원하는 다목적 시각정보 압축 연구), RS-2025-02216217” has been selected as a Global Basic Research Lab funded by NRF, Korea (한국연구재단 글로벌기초연구실).<br>
-              Jinwoo Choi is one of the Co-PIs of the grant. <br>
-              Duration: June 2025 ~ May 2028
-            </p>
-          </div>
-        </div>       
-
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Apr. 2025:                      <br></h4>
-            <p class="card-text">Our work on VideoLLMs' action-scene hallucination mitigation is selected as a <strong style="color: red;">Highlight presentation</strong> of CVPR 2025. <br>
-                 Kyungho Bae, Jinhyung Kim, Sihaeng Lee, Soonyoung Lee, Gunhee Lee*, Jinwoo Choi*, "MASH-VLM: Mitigating Action-Scene Hallucination in Video-LLMs through Disentangled Spatial-Temporal Representations" <br>
-                 Kyungho, big congratulations! Now you know how to conduct high-impact research!
-            </p>
-          </div>
-        </div>     
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Mar. 2025:                      <br></h4>
-            <p class="card-text">Geo Ahn, a 2nd year master student, starts her research internship at NAVER Cloud to conduct interesting research on video understanding. Congratulations!
-            </p>
-          </div>
-        </div> 
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Feb. 2025:                      <br></h4>
-            <p class="card-text"> Two papers are accepted to CVPR 2025. <br>
-                 Kyungho Bae, Jinhyung Kim, Sihaeng Lee, Soonyoung Lee, Gunhee Lee*, Jinwoo Choi*, "MASH-VLM: Mitigating Action-Scene Hallucination in Video-LLMs through Disentangled Spatial-Temporal Representations" <br>
-                 Congratulations to Kyungho! 
-                 Kyungho did this wonderful work during his internship at LG AI Research. <br>
-                 Seun-An Choe, Keon-Hee Park, Jinwoo Choi*, Gyeong-Moon Park*, "Universal Domain Adaptation for Semantic Segmentation" <br>
-                 This is a collaboration with Seun-An Choi, Keon-Hee Park, and Gyeong-Moon Park from KHU AGI Lab. 
-                 Congratulations, and thank you for the collaboration!
-            </p>
-          </div>
-        </div>  
-
-<!--           
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jan. 2025:                      <br></h4>
-            <p class="card-text">Juan Lee (KHU CSE) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div>  -->
-
-
-      </div>
-
-      <br><br>
-
-      2024
-      <div class="row">
-
-<!--         <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Dec. 2024:                      <br></h4>
-            <p class="card-text">Gangmin Choi (KHU EE) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div> 
-
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Nov. 2024:                      <br></h4>
-            <p class="card-text">Jiwook Han (KHU IEM/CSE Dual Major) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div> 
-
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Sep. 2024:                      <br></h4>
-            <p class="card-text">Wooil Lee (KHU SWCON) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div>  -->
-
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Aug 2024:                      <br></h4>
-            <p class="card-text">Our work on disentangled video representation learning is selected as an <strong style="color: red;">Oral presentation</strong> of ECCV 2024. <br>
-                "DEVIAS: Learning Disentangled Video Representations of Action and Scene" <br>
-                 Kyungho, Geo, and Youngrae, big congratulations on the FIRST top conference oral paper! 
-            </p>
-          </div>
-        </div>        
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jul. 2024:                      <br></h4>
-            <p class="card-text">One paper on disentangled video representation learning has been accepted to ECCV 2024. <br>
-                "DEVIAS: Learning Disentangled Video Representations of Action and Scene" <br>
-                Kyungho, Geo, and Youngrae, big congratulations on your first top conference paper! 
-            </p>
-          </div>
-        </div>               
-
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Apr. 2024:                      <br></h4>
-            <p class="card-text">A grant proposal, “AI-based OTT user and content data analysis and content-based video recommendation systems <br>
-              (인공지능 기반 OTT 사용자 및 콘텐츠 데이터 분석과 비디오 추천시스템 개발), RS-2024-00353131” has been accepted by IITP (정보통신기획평가원).<br>
-              Jinwoo Choi is one of the Co-PIs of the grant. <br>
-              Funding amount: 400,000,000 KRW (4억원) for KHU VLL out of 2,000,000,000 KRW (20억원) in total <br>
-              Duration: May 2024 ~ December 2027
-            </p>
-          </div>
-        </div>       
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Mar. 2024:                      <br></h4>
-            <p class="card-text">Prof. Jinwoo Choi serves as an Industry Chair of KCCV 2024.
-            </p>
-          </div>
-        </div>    
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Feb. 2024:                      <br></h4>
-            <p class="card-text">Two papers have been accepted to CVPR 2024. <br>
-                "Do You Remember? Dense Video Captioning with Cross-Modal Memory Retrieval" <br>
-                "Open Set Domain Adaptation for Semantic Segmentation" <br>
-                Congratulations!
-            </p>
-          </div>
-        </div>           
-
-        <!-- <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jan. 2024:                      <br></h4>
-            <p class="card-text">Inbum Heo (CNU Astro and Space Science) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div>  -->
-
-
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jan. 2024:                      <br></h4>
-            <p class="card-text">Yuri Kim (KHU BME/EE Dual Major) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div> 
-
-      </div>
-
-<!--       <br><br>
-      2023
-      <div class="row">
-
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Dec. 2023:                      <br></h4>
-            <p class="card-text">Soohyun Park (KHU SWCON) and Mayank Singh (IIIT Delhi Mathematics and Computing) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div> 
-            
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Nov. 2023:                      <br></h4>
-            <p class="card-text">Dongho Lee, one of the first alumni of our lab, is joining CJ AI Center as a computer vision researcher! Congratulations to Dongho!  
-            </p>
-          </div>
-        </div> 
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Oct. 2023:                      <br></h4>
-            <p class="card-text">One paper, "GLAD: Global-Local View Alignment and Background Debiasing for Unsupervised Video Domain Adaptation with Large Domain Gap" has been accepted to WACV 2024. Hyogun and Kyungho, congratulations on your first conference paper! 
-            </p>
-          </div>
-        </div> 
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Sep. 2023:                      <br></h4>
-            <p class="card-text">One paper on spatio-temporal balanced video understanding has been accepted to NeurIPS 2023. Dongho and Jongseo, big congratulations on your first top conference paper! 
-            </p>
-          </div>
-        </div> 
-
-          <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Sep. 2023:                      <br></h4>
-            <p class="card-text">Maryam Sana joined our lab as a M.S.-Ph.D. student!
-            </p>
-          </div>
-        </div> 
-
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-            <div class="card-body">
-              <h4 class="card-title">Mar. 2023:                      <br></h4>
-              <p class="card-text">Joohyun Chang (KHU CSE) joined our lab as an undergraduate intern!
-              </p>
+        <!-- ============ STATS DASHBOARD ============ -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="section-title">
+                    <h3>Lab at a Glance</h3>
+                    <p>Highlights from our recent research and growing team</p>
+                    <div class="section-divider"></div>
+                </div>
+                <!-- Stats cards are rendered from labData in lab-data.js -->
+                <div class="row" id="stats-container" style="margin-top: 30px;"></div>
             </div>
-        </div> 
+        </section>
 
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jan. 2023:                      <br></h4>
-            <p class="card-text">Junghyun Lee (KHU CSE) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div> 
-      </div> -->
+        <!-- ============ NEWS SECTION ============ -->
+        <section class="news-section">
+            <div class="container">
+                <div class="title" style="text-align:center;">
+                    <h2>News</h2>
+                    <div class="section-divider"></div>
+                </div>
 
-<!--       <br><br>
-      2022 -->
+                <!-- News is rendered from labData in lab-data.js -->
+                <div id="news-container"></div>
 
-        <!-- <div class="row" style="margin-bottom: -2em;">
-          <div class="card" style="width: 96%;">
-              <div class="card-body" style="margin-bottom: 1em;">
-                <h4 class="card-title">
-                  <i class="fa fa-bullhorn" aria-hidden="true"></i> &nbsp;
-                  We are hiring motivated graduate students and undergraduate interns for 2022! 
-                  &nbsp;
-                  <a href="./joinus.html" style="font-size: 1em;">[Click for Detail]</a>
-              </h4>
-              </div>
-            </div>            
-      </div> -->
 
-<!--       <div class="row">  
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Nov. 2022:                      <br></h4>
-            <p class="card-text"> Our paper "Learning Representational Invariances for Data-Efficient Action Recognition" is accepted to CVIU.
-            </p>
-          </div>
-        </div>                   
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Nov. 2022:                      <br></h4>
-              <p class="card-text"> Prof. Jinwoo Choi is selected as an outstanding reviewer at ECCV 2022. He will be serving as a reviewer of CVPR 2023.
-              </p>
-          </div>
-        </div>   
-                
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Sep. 2022:                      <br></h4>
-            <p class="card-text">Soyeon Hong (KHU EE) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div>   
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jul. 2022:                      <br></h4>
-            <p class="card-text">Geo Ahn (KHU SWCON) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div>   
+                <button class="news-more-btn" id="newsMoreBtn" onclick="toggleMoreNews()">
+                    <i class="fa fa-plus" id="newsMoreIcon"></i> &nbsp;<span id="newsMoreText">Show More News</span>
+                </button>
 
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">May 2022:                      <br></h4>
-            <p class="card-text">A grant proposal on "Towards Generalizable Video Understanding: Learning Debiased, Compositional Video Representations" has been accepted by National Research Foundation (Jun. 2022 ~ Feb. 2025).
-            </p>
-          </div>
-        </div>                   
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">May 2022:                      <br></h4>
-            <p class="card-text">JunBeom Hong (KHU CSE/Econ Dual Major) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div>   
-          
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Mar. 2022:<br></h4>
-            <p class="card-text">Prof. Jinwoo Choi will be serving as a reviewer of ECCV 2022.
-            </p>
-          </div>
-        </div>           
-        
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-            <div class="card-body">
-              <h4 class="card-title">Mar. 2022:                      <br></h4>
-              <p class="card-text">Kyungho Bae and Hyogun Lee joined our lab as master students!
-              </p>
             </div>
-        </div>           
+        </section>
 
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Feb. 2022:                      <br></h4>
-            <p class="card-text">Prof. Jinwoo Choi gave an invited talk, “Towards Data-Efficient Video Understanding”, at IPIU 2022!
-            </p>
-          </div>
-        </div>           
-          
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Feb. 2022:                      <br></h4>
-            <p class="card-text">Jongseo Lee (KHU BME/EE Dual Major) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div>           
-      </div>
-
-      <br><br>
-      2021
-
-      <div class="row">
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jul. 2021:                      <br></h4>
-            <p class="card-text">Hyogun Lee (KHU EE) joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div>         
-
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jul. 2021:
-              <br></h4>
-            <p class="card-text">We launched KHU Vision and Learning Reading Group with Prof. Seong Tae Kim and Prof. Gyeong-Moon Park at KHU CS.
-            </p>
-          </div>
-        </div>
-
-        <div class="card" style="width: 100%; margin-bottom: -0.5em;">
-          <div class="card-body">
-            <h4 class="card-title">Jul. 2021:                <br></h4>
-            <p class="card-text">Dongho Lee and Jongmin(Paul) Shin joined our lab as master students, and Kyungho Bae joined our lab as an undergraduate intern!
-            </p>
-          </div>
-        </div>            -->
-            
-
-
-<!-- 
-              <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                <div class="card-body">
-                  <h4 class="card-title">One paper is accepted in DAC 2022<br></h4>
-                  <p class="card-text">Work by Jonghyun and MSR/UNIST team.<br> 
-                    Paper and the code will be available soon.</p>
-                </div>
-              </div>            
-
-              <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                <div class="card-body">
-                  <h4 class="card-title">One paper is accepted in ICLR 2022<br></h4>
-                  <p class="card-text">Work by Hyunseo, Dahyun, Jung-woo and Jonghyun.<br> 
-                    Paper and the code will be available soon.</p>
-                </div>
-              </div>             -->
-
-              <!-- <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                <div class="card-body">
-                  <h4 class="card-title">One paper is accepted in EMNLP 2021 as an Oral presentation<br></h4>
-                  <p class="card-text">Work by Jonghyun with AI2 about <a href="https://iconary.allenai.org/" target="_new">Iconary</a>.<br> 
-                    Paper and the code will be available soon.</p>
-                </div>
-              </div>            
-
-              <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                <div class="card-body">
-                  <h4 class="card-title">4 papers (1 oral, 3 posters) are accepted in ICCV 2021<br></h4>
-                  <p class="card-text">All first authors are our members with amazing collaborators from AI2, UC Berkeley, NCSOFT, KAIST and Seoul National University.<br> 
-                    Please refer to <a href="./pub.html">publication page</a>.</p>
-                </div>
-              </div>             -->
-
-              <!-- <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                <div class="card-body">
-                  <h4 class="card-title">Internships to <a href="https://allenai.org/" target="_blank">AI2</a>, <a href="https://clova.ai/en/research/research-area-detail.html?id=0" target="_blank">NAVER CLOVA AI</a> and <a href="https://www.lgresearch.ai/" target="_blank">LG AI</a><br></h4>
-                  <p class="card-text" style="margin-bottom: 1em;">
-                  Congratulations Byeonghwi (AI2), Dahyun (NAVER AI), Hyunseo (NAVER AI), Yeong-oo (NAVER AI) and Daechul (LG AI)!
-                  </p>
-                </div>
-              </div>             -->
-
-               <!-- <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                  <div class="card-body">
-                    <h4 class="card-title">One paper is accepted in IEEE TPAMI<br></h4>
-                    <p class="card-text">Work by Mohammad, Yeong-woo and <a href="http://vi.kaist.ac.kr/project/kuk-jin-yoon/" target="_new">Prof. Kuk-Jin Yoon (KAIST)</a>.<br/>
-                    The paper is an extension of our <a href="https://arxiv.org/pdf/1912.01196.pdf" target="_new">CVPR 2020 oral paper</a>.</p>
-                  </div>
-                </div>             -->
-
-                <!-- <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                  <div class="card-body">
-                    <h4 class="card-title">We're presenting our findings at CVPR 2021<br></h4>
-                    <p class="card-text" style="margin-bottom: 1em;">
-                    1 main conference paper. 2 (+1) workshop challege winners. 1 invited workshop paper.
-                    Please refer to <a href="./pub.html">publication page</a>.
-                     <a href="./research/highlight_cvpr21.html" style="font-weight: 600; text-decoration: underline;">See details here.</a> 
-                    </p>
-                  </div>
-                </div>             -->
-
-
-                <!-- <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                    <div class="card-body">
-                      <h4 class="card-title">Kunal joins <a href="https://allenai.org/" target="_new">AI2</a> as an PYI<br></h4>
-                      <p class="card-text" style="margin-bottom: 1em;">Our long-time research intern, Kunal Pratap Singh, received an <a href="https://allenai.org/predoctoral-young-investigators" target="_new">pre-doctoral young investigator (PYI)</a> offer from <a href="https://allenai.org/" target="_new">AI2</a>. Congratulations!
-                      </p>
-                    </div>
-                </div>             -->
-
-                <!-- <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                    <div class="card-body">
-                      <h4 class="card-title">One paper is accepted in CVPR 2021<br></h4>
-                      <p class="card-text" style="margin-bottom: 1em;">
-                        Work by Jonghyun with NAVER AI. <br/> 
-                      Paper and the code will be available soon.
-                      </p>
-                    </div>
-                </div>             -->
-
-                <!-- <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                    <div class="card-body">
-                      <h4 class="card-title">2nd place at ALFRED challenge at ECCV 2020 EVAL Workshop! 
-                        <font style="font-size: 10pt; color: rgb(193, 0, 51)">(Sponsored by AI2 and Google)</font><br></h4>
-                      <p class="card-text" style="margin-bottom: 1em;">Work by Kunal, Suvaansh and Byeonghwi.<br/>
-                      Leaderboard: <a href="https://leaderboard.allenai.org/alfred/submissions/public" target="_new">here</a>. Workshop page is <a href="https://askforalfred.com/EVAL/" target="_new">here</a> (our paper is #9).</p>
-                    </div>
-                </div>             -->
-
-                <!-- <div class="card" style="width: 45%; margin-bottom: -0.5em;">
-                    <div class="card-body">
-                      <h4 class="card-title">One paper is accepted in ECCV 2020<br></h4>
-                      <p class="card-text" style="margin-bottom: 1em;">Work by Dahyun and Kunal.<br/>
-                      The <a href="http://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123570562.pdf" target="_new">paper is about network architecture search for binary networks</a>.<br/>
-                      (An improved version of Samsung Humantech Paper award.)</p>
-                    </div>
-                </div>            
-
-                <div class="card" style="width: 45%;">
-                    <div class="card-body">
-                      <h4 class="card-title">One paper is accepted in CVPR 2020 as an Oral presentation!<br></h4>
-                      <p class="card-text">Work by Mohammad and <a href="http://vi.kaist.ac.kr/project/kuk-jin-yoon/" target="_new">Prof. Kuk-Jin Yoon (KAIST)</a>.<br/>
-                      The <a href="https://arxiv.org/pdf/1912.01196.pdf" target="_new">paper is about generating super-resolution image from event data</a>.</p>
-                    </div>
-                </div>            
-  
-                <div class="card" style="width: 45%;">
-                    <div class="card-body">
-                        <h4 class="card-title">Won Bronze prize at 26th Samsung Humantech Paper Award (2020)</h4>
-                        <p class="card-text" style="margin-bottom: 1em;">Congratulations on Kunal and Dahyun.<br/>
-                            The <a href="https://arxiv.org/pdf/2002.06963" target="_new">paper is about network architecture search for binary networks</a>.</p>
-                    </div>
-                </div>             -->
-                  
-                <!-- <div class="card" style="width: 45%;">
-                  <div class="card-body">
-                    <h4 class="card-title">We're hiring graduate students for 2021.</h4>
-                    <p class="card-text">Send us an email to apply.</p>
-                    <a href="mailto:jhc@gist.ac.kr" class="card-link"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>
-                  </div>
-                </div>            
-            </div> -->
-      </div>
     </div>
-  </div>
-  <!--  End Modal -->
-  <div w3-include-html="footer.html"></div>
+    <!--  End Modal -->
+    <div w3-include-html="footer.html"></div>
 
-  <!--   Core JS Files   -->
-  <script src="./assets/js/core/jquery.min.js"></script>
-  <script src="./assets/js/core/popper.min.js"></script>
-  <script src="./assets/js/bootstrap-material-design.js"></script>
-  <!--  Plugin for Date Time Picker and Full Calendar Plugin  -->
-  <script src="./assets/js/plugins/moment.min.js"></script>
-  <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-  <script src="./assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
-  <!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="./assets/js/plugins/nouislider.min.js"></script>
-  <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
-  <script src="./assets/js/material-kit.js?v=2.0.2"></script>
-  <!-- Fixed Sidebar Nav - js With initialisations For Demo Purpose, Don't Include it in your project -->
-  <script src="./assets/assets-for-demo/js/material-kit-demo.js"></script>
-  <!-- including html -->
-  <script src="./assets/js/include-html.js"></script>    
-  <script>
-    $(document).ready(function() {
+    <!--   Core JS Files   -->
+    <script src="./assets/js/core/jquery.min.js"></script>
+    <script src="./assets/js/core/popper.min.js"></script>
+    <script src="./assets/js/bootstrap-material-design.js"></script>
+    <script src="./assets/js/plugins/moment.min.js"></script>
+    <script src="./assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <script src="./assets/js/plugins/nouislider.min.js"></script>
+    <script src="./assets/js/material-kit.js?v=2.0.2"></script>
+    <script src="./assets/assets-for-demo/js/material-kit-demo.js"></script>
+    <script src="./assets/js/include-html.js"></script>
+    <!-- Lab data — edit /assets/js/lab-data.js to update News and Lab at a Glance -->
+    <script src="./assets/js/lab-data.js"></script>
 
-        //init DateTimePickers
-        materialKit.initFormExtendedDatetimepickers();
+    <script>
+        // ===== Render Lab at a Glance from labData.stats =====
+        function renderStats() {
+            if (!window.labData || !window.labData.stats) return;
+            var container = document.getElementById('stats-container');
+            if (!container) return;
+            var html = window.labData.stats.map(function(s) {
+                return ''
+                  + '<div class="col-md-3 col-sm-6">'
+                  +   '<div class="stat-card ' + (s.colorClass || 's1') + '">'
+                  +     '<div class="stat-icon"><i class="fa ' + s.icon + '"></i></div>'
+                  +     '<div class="stat-number" data-target="' + s.value + '" data-suffix="' + (s.suffix || '') + '">0</div>'
+                  +     '<div class="stat-label">' + s.label + '</div>'
+                  +     '<div class="stat-sublabel">' + s.sublabel + '</div>'
+                  +   '</div>'
+                  + '</div>';
+            }).join('');
+            container.innerHTML = html;
+        }
 
-        // Sliders Init
-        // materialKit.initSliders();
+        // ===== Render News from labData.news =====
+        function renderNews() {
+            if (!window.labData || !window.labData.news) return;
+            var container = document.getElementById('news-container');
+            if (!container) return;
+            var recentCount = window.labData.recentCount || 8;
+            var rendered = 0;
+            var html = '';
+            window.labData.news.forEach(function(yearBlock, yIdx) {
+                // Year heading — hidden if all items in this year are beyond recentCount
+                var yearStartIndex = rendered;
+                var yearHtml = '';
+                var rowItems = '';
+                yearBlock.items.forEach(function(item) {
+                    var hidden = (rendered >= recentCount);
+                    var cardClass = 'card news-card' + (hidden ? ' news-hidden-item' : '');
+                    var titleHtml = '';
+                    if (item.badge) {
+                        titleHtml += '<span class="news-badge ' + item.badge.class + '">' + item.badge.text + '</span>';
+                    }
+                    if (item.date) {
+                        titleHtml += '<span class="news-date">' + item.date + '</span>';
+                    }
+                    if (item.title) {
+                        titleHtml += item.title;
+                    }
+                    rowItems += ''
+                      + '<div class="' + cardClass + '" style="width: 100%;">'
+                      +   '<div class="card-body">'
+                      +     '<h4 class="card-title">' + titleHtml + '</h4>'
+                      +     '<p class="card-text">' + item.content + '</p>'
+                      +   '</div>'
+                      + '</div>';
+                    rendered++;
+                });
+                // The year heading hides if its first item was already past recentCount
+                var yearHidden = (yearStartIndex >= recentCount);
+                yearHtml += '<div class="news-year' + (yearHidden ? ' news-hidden-item' : '') + '">' + yearBlock.year + '</div>';
+                yearHtml += '<div class="row' + (yearHidden ? ' news-hidden-item' : '') + '">' + rowItems + '</div>';
+                html += yearHtml;
+            });
+            container.innerHTML = html;
+        }
 
-        includeHTML();
-    });
-  </script>
+        // Counter animation
+        function animateCounters() {
+            var counters = document.querySelectorAll('.stat-number');
+            counters.forEach(function(counter) {
+                if (counter.dataset.animated === "1") return;
+                counter.dataset.animated = "1";
+                var target = +counter.getAttribute('data-target');
+                var suffix = counter.getAttribute('data-suffix') || "";
+                var duration = 1600;
+                var startTime = null;
+                function step(ts) {
+                    if (!startTime) startTime = ts;
+                    var progress = Math.min((ts - startTime) / duration, 1);
+                    var eased = 1 - Math.pow(1 - progress, 3);
+                    counter.textContent = Math.floor(eased * target) + suffix;
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        counter.textContent = target + suffix;
+                    }
+                }
+                requestAnimationFrame(step);
+            });
+        }
+
+        // Toggle more news
+        function toggleMoreNews() {
+            var items = document.querySelectorAll('.news-hidden-item');
+            var btnText = document.getElementById('newsMoreText');
+            var btnIcon = document.getElementById('newsMoreIcon');
+            var anyHidden = false;
+            items.forEach(function(item) {
+                if (item.style.display === '' || item.style.display === 'none' || getComputedStyle(item).display === 'none') {
+                    anyHidden = true;
+                }
+            });
+            items.forEach(function(item) {
+                if (anyHidden) {
+                    item.style.display = (item.tagName === 'DIV' && item.classList.contains('row')) ? 'flex' : 'block';
+                    // Trigger animation
+                    setTimeout(function(){ item.classList.add('visible'); }, 50);
+                } else {
+                    item.style.display = 'none';
+                    item.classList.remove('visible');
+                }
+            });
+            if (anyHidden) {
+                btnText.textContent = 'Show Less';
+                btnIcon.className = 'fa fa-minus';
+            } else {
+                btnText.textContent = 'Show More News';
+                btnIcon.className = 'fa fa-plus';
+            }
+        }
+
+        $(document).ready(function() {
+            materialKit.initFormExtendedDatetimepickers();
+            includeHTML();
+
+            // === Render stats + news from labData FIRST, then run effects ===
+            renderStats();
+            renderNews();
+
+            // Hide older news initially (must happen after renderNews)
+            document.querySelectorAll('.news-hidden-item').forEach(function(item) {
+                item.style.display = 'none';
+            });
+
+            // Explicitly init the carousel with fade ride options (ensures interval starts)
+            $('#heroCarousel').carousel({
+                interval: 6000,
+                pause: 'hover',
+                ride: 'carousel'
+            });
+
+            // Scroll listener — adds 'scrolled' class for shrunk navbar look,
+            // and keeps navbar fixed visible (prevents Material Kit auto-hide)
+            var navbar = document.getElementById('sectionsNav');
+            function onScroll() {
+                if (!navbar) return;
+                if (window.pageYOffset > 60) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                // Force visibility regardless of any other handlers
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.opacity = '1';
+                navbar.style.visibility = 'visible';
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            // Intersection Observer for stats + news cards
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('stat-card')) {
+                            animateCounters();
+                        }
+                        if (entry.target.classList.contains('news-card')) {
+                            entry.target.classList.add('visible');
+                        }
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.stat-card, .news-card').forEach(function(el) {
+                observer.observe(el);
+            });
+
+            // Fallback: trigger counter on load if user is already viewing stats
+            setTimeout(function() {
+                var statsSec = document.querySelector('.stats-section');
+                if (statsSec) {
+                    var rect = statsSec.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        animateCounters();
+                    }
+                }
+            }, 800);
+        });
+    </script>
 </body>
 
-</html> 
+</html>
 
-<!-- <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=yADEG0gfwM339hkSWmyiWgjeRa--3VJG8_MZFpX0Ftg&cl=ffffff&w=a"></script> --> -->
-<a href="https://clustrmaps.com/site/1c7zo"  title="ClustrMaps"><img src="//www.clustrmaps.com/map_v2.png?d=yADEG0gfwM339hkSWmyiWgjeRa--3VJG8_MZFpX0Ftg&cl=ffffff" /></a>
+<a href="https://clustrmaps.com/site/1c7zo" title="ClustrMaps"><img src="//www.clustrmaps.com/map_v2.png?d=yADEG0gfwM339hkSWmyiWgjeRa--3VJG8_MZFpX0Ftg&cl=ffffff" /></a>
