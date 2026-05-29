@@ -93,8 +93,8 @@
         /* ============ Hero Carousel ============ */
         .hero-section {
             position: relative;
-            height: 94vh;
-            min-height: 760px;
+            height: 100vh;
+            min-height: 860px;
             overflow: hidden;
             background-color: #1a2845;
         }
@@ -195,7 +195,7 @@
 
         /* ===== Research showcase carousel (paper highlight cards) ===== */
         .hero-carousel {
-            max-width: 1120px;
+            max-width: 1480px;
             margin: 0 auto;
             position: relative;
         }
@@ -235,14 +235,14 @@
             -webkit-backdrop-filter: blur(16px);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 18px;
-            min-height: 340px;
+            border-radius: 20px;
+            min-height: 440px;
             overflow: hidden;
         }
         /* Image area uses CONTAIN so full image is visible regardless of aspect ratio */
         .paper-showcase .ps-image {
-            flex: 0 0 52%;
-            min-height: 340px;
+            flex: 0 0 60%;
+            min-height: 440px;
             background-color: #0e1424;
             background-image:
                 radial-gradient(ellipse at center, rgba(56,98,160,0.12) 0%, rgba(0,0,0,0) 70%);
@@ -250,7 +250,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 24px;
         }
         .paper-showcase .ps-image-inner {
             width: 100%;
@@ -258,11 +258,11 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            border-radius: 10px;
+            border-radius: 12px;
         }
         .paper-showcase .ps-info {
             flex: 1;
-            padding: 30px 36px;
+            padding: 42px 46px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -270,23 +270,23 @@
             border-left: 3px solid #e63946;
         }
         .paper-showcase .ps-venue {
-            font-size: 0.78rem;
+            font-size: 0.9rem;
             color: #ffd166;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 18px;
         }
         .paper-showcase .ps-title {
             color: #fff;
-            font-size: 1.25rem;
+            font-size: 1.55rem;
             font-weight: 500;
-            line-height: 1.45;
-            margin-bottom: 20px;
+            line-height: 1.4;
+            margin-bottom: 28px;
         }
         .paper-showcase .ps-link {
             color: #ffd166;
-            font-size: 0.92rem;
+            font-size: 1.02rem;
             font-weight: 600;
             text-decoration: none;
             transition: color 0.25s, transform 0.25s;
@@ -337,38 +337,37 @@
             width: 40px;
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1500px) {
             .hero-carousel { max-width: 94%; }
             .hero-carousel .carousel-control-prev { left: -20px; }
             .hero-carousel .carousel-control-next { right: -20px; }
         }
         @media (max-width: 992px) {
-            .hero-content h1 { font-size: 2rem; }
-            .paper-showcase { min-height: 300px; }
-            .paper-showcase .ps-image { min-height: 300px; flex: 0 0 48%; }
-            .paper-showcase .ps-title { font-size: 1.1rem; }
+            .hero-section { min-height: 800px; }
+            .paper-showcase { min-height: 380px; }
+            .paper-showcase .ps-image { min-height: 380px; flex: 0 0 54%; }
+            .paper-showcase .ps-title { font-size: 1.25rem; }
         }
         @media (max-width: 768px) {
-            .hero-section { min-height: 820px; }
+            .hero-section { min-height: 880px; }
             .hero-content { padding: 80px 16px 40px; }
-            .hero-content h1 { font-size: 1.55rem; }
             .hero-content h3 { font-size: 0.95rem; margin-bottom: 1.4em; }
             .paper-showcase {
                 flex-direction: column;
                 min-height: auto;
             }
             .paper-showcase .ps-image {
-                flex: 0 0 220px;
-                min-height: 220px;
+                flex: 0 0 260px;
+                min-height: 260px;
                 width: 100%;
-                padding: 12px;
+                padding: 14px;
             }
             .paper-showcase .ps-info {
                 border-left: none;
                 border-top: 3px solid #e63946;
-                padding: 20px 22px;
+                padding: 22px 24px;
             }
-            .paper-showcase .ps-title { font-size: 1rem; }
+            .paper-showcase .ps-title { font-size: 1.05rem; }
             .hero-carousel .carousel-control-prev,
             .hero-carousel .carousel-control-next { display: none; }
             .navbar .navbar-nav .nav-item { margin: 0; }
