@@ -56,6 +56,12 @@ window.labData = {
             year: 2026,
             items: [
                 {
+                    badge: { text: "ECCV", class: "badge-eccv" },
+                    date: "Jun 2026",
+                    title: "",
+                    content: 'Two papers are accepted to <strong style="color: red;">ECCV 2026</strong>.<br>"Why Can\'t I Open My Drawer? Mitigating Object-Driven Shortcuts in Zero-Shot Compositional Action Recognition"<br>Congratulations to Geo on your first sol-first author paper!<br>"ReQuest: Rethinking-based Question-Aware Frame Selection for Long-Form Video QA"<br>Congratulations to external collaborators!'
+                },
+                {
                     badge: { text: "TPAMI", class: "badge-tpami" },
                     date: "2026",
                     title: "",
