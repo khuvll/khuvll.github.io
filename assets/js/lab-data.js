@@ -104,7 +104,7 @@ window.labData = {
                     badge: { text: "Press", class: "badge-press" },
                     date: "Aug 2025",
                     title: "",
-                    content: 'Press Coverage: Our recent work, MASH-VLM (CVPR 2025 Highlight) has been featured in Digital Chosun Ilbo (August 4, 2025).<br><a href="https://digitalchosun.dizzo.com/site/data/html_dir/2025/08/04/2025080480231.html#">Digital Chosun Ilbo Article</a>'
+                    content: 'Press Coverage: Our recent work, MASH-VLM (CVPR 2025 Highlight) has been featured in NewsTheAI (August 4, 2025).<br><a href="https://www.newstheai.com/news/articleView.html?idxno=8561">NewsTheAI Article</a>'
                 },
                 {
                     badge: { text: "BMVC Oral", class: "badge-bmvc" },
