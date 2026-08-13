@@ -5,7 +5,7 @@
  *
  * Badge classes (color tags):
  *   badge-neurips | badge-iccv | badge-cvpr | badge-bmvc | badge-tpami
- *   badge-eccv    | badge-aaai | badge-grant | badge-press | badge-member | badge-misc
+ *   badge-eccv    | badge-iclr | badge-aaai | badge-grant | badge-press | badge-member | badge-misc
  *
  * Stat icon: any Font Awesome 4 icon name (e.g. "fa-trophy", "fa-star", "fa-bullhorn").
  * Stat colorClass: s1 (red) | s2 (amber) | s3 (teal) | s4 (blue)
@@ -55,6 +55,12 @@ window.labData = {
         {
             year: 2026,
             items: [
+                {
+                    badge: { text: "ICLR", class: "badge-iclr" },
+                    date: "Aug 2026",
+                    title: "",
+                    content: "Jinwoo serves as an Area Chair for ICLR 2027."
+                },
                 {
                     badge: { text: "ECCV", class: "badge-eccv" },
                     date: "Jun 2026",
