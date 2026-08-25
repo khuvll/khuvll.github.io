@@ -18,7 +18,7 @@ window.labData = {
         {
             colorClass: "s1",
             icon: "fa-trophy",
-            value: 7, suffix: "+",
+            value: 7, suffix: "",
             label: "Oral / Highlight / Spotlight",
             sublabel: "Top-venue selective presentations"
         },
@@ -32,14 +32,14 @@ window.labData = {
         {
             colorClass: "s3",
             icon: "fa-users",
-            value: 25, suffix: "+",
+            value: 15, suffix: "",
             label: "Lab Members",
             sublabel: "PI, graduate students &amp; interns"
         },
         {
             colorClass: "s4",
             icon: "fa-flask",
-            value: 4, suffix: "",
+            value: 3, suffix: "",
             label: "Active Grants",
             sublabel: "NRF · IITP funded research"
         }
