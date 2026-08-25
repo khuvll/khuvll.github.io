@@ -59,7 +59,7 @@ window.labData = {
                     badge: { text: "Grant", class: "badge-grant" },
                     date: "Aug 2026",
                     title: "",
-                    content: 'A grant proposal, "Understanding and Correcting Decision Failure in Multimodal AI via Cognitive Disagreement and Self-Diagnosis (핵심연구(전략형) - Science of AI)" has been accepted by NRF, Korea.<br>Jinwoo Choi is the PI of the grant.<br>Duration: September 2026 ~ August 2029'
+                    content: 'A grant proposal, "Understanding and Correcting Decision Failure in Multimodal AI via Cognitive Disagreement and Self-Diagnosis (핵심연구(전략형) - Science of AI)" has been accepted by NRF, Korea. Jinwoo Choi is the PI of the grant.'
                 },
                 {
                     badge: { text: "ICLR", class: "badge-iclr" },
