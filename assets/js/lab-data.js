@@ -56,6 +56,12 @@ window.labData = {
             year: 2026,
             items: [
                 {
+                    badge: { text: "Press", class: "badge-press" },
+                    date: "Aug 2026",
+                    title: "",
+                    content: 'Press Coverage: Our recent work, RCORE (ECCV 2026) has been featured in the media.<br><a href="https://n.news.naver.com/mnews/article/018/0006359661?sid=105" target="_blank">News Article</a> &nbsp;|&nbsp; <a href="https://www.navercorp.com/media/pressReleasesDetail?seq=10034616" target="_blank">NAVER Press Release</a>'
+                },
+                {
                     badge: { text: "Grant", class: "badge-grant" },
                     date: "Aug 2026",
                     title: "",
