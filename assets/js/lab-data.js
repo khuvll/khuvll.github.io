@@ -56,6 +56,12 @@ window.labData = {
             year: 2026,
             items: [
                 {
+                    badge: { text: "NeurIPS", class: "badge-neurips" },
+                    date: "Sep 2026",
+                    title: "",
+                    content: 'Three solid works are accepted to <strong style="color: red;">NeurIPS 2026</strong>.<br>"Which Way Did It Move? Diagnosing and Overcoming Directional Motion Blindness in Video-LLMs"<br>"TRACE: Trajectory-Aware Concepts for Explainable Video Understanding"<br>"EVIDENT: Routing MLLM Adaptation through Entity-Grounded Visual Evidence for Cross-Domain Video Temporal Grounding"<br>Big congratulations to every author! Awesome job!'
+                },
+                {
                     badge: { text: "Press", class: "badge-press" },
                     date: "Aug 2026",
                     title: "",
