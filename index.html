@@ -337,6 +337,30 @@
             width: 40px;
         }
 
+        /* OpenLab slide (temporary, removed automatically after the event) */
+        .paper-showcase .ps-image.ps-openlab {
+            padding: 0;
+            background: #f6f5f0 url('./assets/img/openlab/openlab_hero.jpg') center 55% / auto 84% no-repeat;
+            cursor: zoom-in;
+        }
+        [data-openlab-slide] .ps-title,
+        [data-openlab-slide] .ps-meta { word-break: keep-all; }
+        .paper-showcase .ps-meta {
+            color: rgba(255,255,255,0.72);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: -12px 0 28px;
+        }
+        .paper-showcase .ps-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; }
+        .paper-showcase .ps-link-sub {
+            color: rgba(255,255,255,0.72);
+            font-size: 1.02rem; font-weight: 500;
+            background: none; border: 0; padding: 0; cursor: pointer;
+            text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(255,255,255,0.35);
+            transition: color .2s;
+        }
+        .paper-showcase .ps-link-sub:hover { color: #fff; }
+
         @media (max-width: 1500px) {
             .hero-carousel { max-width: 94%; }
             .hero-carousel .carousel-control-prev { left: -20px; }
@@ -368,6 +392,10 @@
                 padding: 22px 24px;
             }
             .paper-showcase .ps-title { font-size: 1.05rem; }
+            .paper-showcase .ps-image.ps-openlab { background-size: 84% auto; background-position: center 60%; }
+            .paper-showcase .ps-meta { font-size: 0.88rem; margin: -18px 0 18px; }
+            .paper-showcase .ps-actions { gap: 16px; }
+            .paper-showcase .ps-link-sub, .paper-showcase .ps-actions .ps-link { font-size: 0.95rem; }
             .hero-carousel .carousel-control-prev,
             .hero-carousel .carousel-control-next { display: none; }
             .navbar .navbar-nav .nav-item { margin: 0; }
@@ -593,8 +621,25 @@
                 <!-- Carousel of paper highlight cards (smooth cross-fade) -->
                 <div id="heroCarousel" class="carousel slide carousel-fade hero-carousel" data-ride="carousel" data-interval="6000" data-pause="hover">
                     <div class="carousel-inner">
+                        <!-- Slide 0: OpenLab 2026 (auto-removed after 2026-10-07 21:00 KST) -->
+                        <div class="carousel-item active" data-openlab-slide>
+                            <div class="paper-showcase">
+                                <div class="ps-image ps-openlab" role="button" tabindex="0" aria-label="OpenLab 포스터 보기"
+                                     onclick="window.openOpenLabPopup && openOpenLabPopup()"
+                                     onkeydown="if(event.key==='Enter'&&window.openOpenLabPopup)openOpenLabPopup()"></div>
+                                <div class="ps-info">
+                                    <div class="ps-venue">Open Lab · 2026.10.07 Wed</div>
+                                    <div class="ps-title">학부연구생 · 대학원생 모집을 위한 연구실 소개</div>
+                                    <div class="ps-meta">18:00 – 21:00 · 전자정보대학관 211-1호<br>간단한 피자가 준비되어 있어요 🍕</div>
+                                    <div class="ps-actions">
+                                        <a class="ps-link" href="https://docs.google.com/forms/d/145eyKXXnPYiAmPAlwWi3C50lRrNl3Id7gi0mFAQC3AQ/viewform" target="_blank" rel="noopener">참가 신청 &nbsp;<i class="fa fa-arrow-right"></i></a>
+                                        <button type="button" class="ps-link-sub" onclick="window.openOpenLabPopup && openOpenLabPopup()">포스터 보기</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Slide 1: NeurIPS 2025 Spotlight -->
-                        <div class="carousel-item active">
+                        <div class="carousel-item">
                             <div class="paper-showcase">
                                 <div class="ps-image">
                                     <div class="ps-image-inner" style="background-image: url('./assets/img/pub/NeurIPS_2025_DANCE.gif');"></div>
@@ -689,7 +734,21 @@
                         <li data-target="#heroCarousel" data-slide-to="3"></li>
                         <li data-target="#heroCarousel" data-slide-to="4"></li>
                         <li data-target="#heroCarousel" data-slide-to="5"></li>
+                        <li data-target="#heroCarousel" data-slide-to="6"></li>
                     </ol>
+                    <script>
+                        // Remove the OpenLab slide once the event is over
+                        (function () {
+                            if (new Date() < new Date('2026-10-07T21:00:00+09:00')) return;
+                            var slide = document.querySelector('[data-openlab-slide]');
+                            if (!slide) return;
+                            var next = slide.nextElementSibling;
+                            slide.parentNode.removeChild(slide);
+                            if (next) next.classList.add('active');
+                            var lis = document.querySelectorAll('#heroCarousel .carousel-indicators li');
+                            lis[lis.length - 1].parentNode.removeChild(lis[lis.length - 1]);
+                        })();
+                    </script>
                 </div>
             </div>
         </div>
@@ -731,6 +790,152 @@
 
     </div>
     <!--  End Modal -->
+    <!-- ============ OpenLab 2026 popup (auto-hides after 2026-10-07 21:00 KST) ============ -->
+    <!-- To preview anytime: index.html?openlab=1  |  To remove: delete this block + assets/img/openlab/ -->
+    <style>
+        .ol-overlay {
+            --ol-paper: #f6f5f0;
+            --ol-ink: #17171a;
+            --ol-w: min(calc(100vw - 32px), calc((100vh - 160px) / 1.4143), 540px);
+            position: fixed; inset: 0; z-index: 2000;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            padding: 16px;
+            background: rgba(12, 12, 16, 0.72);
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+            opacity: 0;
+            transition: opacity .22s ease;
+        }
+        @supports (height: 100dvh) {
+            .ol-overlay { --ol-w: min(calc(100vw - 32px), calc((100dvh - 160px) / 1.4143), 540px); }
+        }
+        .ol-overlay.ol-open { display: flex; }
+        .ol-overlay.ol-visible { opacity: 1; }
+
+        .ol-sheet {
+            width: var(--ol-w);
+            background: var(--ol-paper);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px -20px rgba(0,0,0,.55);
+            transform: scale(.98);
+            transition: transform .22s cubic-bezier(.2,.8,.2,1);
+        }
+        .ol-overlay.ol-visible .ol-sheet { transform: none; }
+
+        .ol-poster { display: block; cursor: zoom-in; }
+        .ol-poster img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1.4143; }
+
+        .ol-bar {
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            padding: 14px 16px 14px 20px;
+            border-top: 1px solid rgba(0,0,0,.08);
+            font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Roboto", sans-serif;
+            color: var(--ol-ink);
+        }
+        .ol-when { line-height: 1.35; min-width: 0; }
+        .ol-when strong { display: block; font-size: 15px; font-weight: 700; letter-spacing: -.2px; }
+        .ol-when span { display: block; font-size: 13px; color: #6b6b70; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ol-apply {
+            flex: 0 0 auto;
+            display: inline-flex; align-items: center; gap: 6px;
+            height: 44px; padding: 0 18px;
+            border-radius: 8px;
+            background: var(--ol-ink); color: #fff !important;
+            font-size: 15px; font-weight: 600; letter-spacing: -.2px;
+            text-decoration: none !important;
+            transition: background .15s ease;
+        }
+        .ol-apply:hover { background: #3b3bd1; }
+        .ol-apply svg { transition: transform .15s ease; }
+        .ol-apply:hover svg { transform: translateX(2px); }
+
+        .ol-controls {
+            width: var(--ol-w);
+            display: flex; justify-content: space-between;
+            margin-top: 10px;
+        }
+        .ol-controls button {
+            background: none; border: 0; padding: 6px 2px; cursor: pointer;
+            font: 13px/1 "Apple SD Gothic Neo", "Noto Sans KR", "Roboto", sans-serif;
+            color: rgba(255,255,255,.72);
+        }
+        .ol-controls button:hover { color: #fff; }
+        body.ol-lock { overflow: hidden; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ol-overlay, .ol-sheet { transition: none; }
+        }
+    </style>
+
+    <div class="ol-overlay" id="olPopup" role="dialog" aria-modal="true" aria-label="KHU Vision &amp; Learning Lab OpenLab 안내">
+        <div class="ol-sheet">
+            <a class="ol-poster" href="./assets/img/openlab/openlab_poster.jpg" target="_blank" title="포스터 크게 보기">
+                <img src="./assets/img/openlab/openlab_poster_thumb.jpg" width="750" height="1061"
+                     alt="OpenLab — 2026년 10월 7일(수) 18:00–21:00, 전자정보대학관 211-1호. 학부연구생·대학원생 모집을 위한 연구실 소개.">
+            </a>
+            <div class="ol-bar">
+                <div class="ol-when">
+                    <strong>10월 7일 (수) 18:00</strong>
+                    <span>전자정보대학관 211-1호</span>
+                </div>
+                <a class="ol-apply" href="https://docs.google.com/forms/d/145eyKXXnPYiAmPAlwWi3C50lRrNl3Id7gi0mFAQC3AQ/viewform" target="_blank" rel="noopener">
+                    참가 신청
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="ol-controls">
+            <button type="button" data-ol-hide-today>오늘 하루 보지 않기</button>
+            <button type="button" data-ol-close>닫기</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var END = new Date('2026-10-07T21:00:00+09:00');   // popup stops appearing after this
+            var KEY = 'vll_openlab_hide_until';
+            var popup = document.getElementById('olPopup');
+            if (!popup) return;
+
+            function open() {
+                popup.classList.add('ol-open');
+                document.body.classList.add('ol-lock');
+                requestAnimationFrame(function () { popup.classList.add('ol-visible'); });
+            }
+            function close() {
+                popup.classList.remove('ol-visible');
+                document.body.classList.remove('ol-lock');
+                setTimeout(function () { popup.classList.remove('ol-open'); }, 220);
+            }
+            window.openOpenLabPopup = open;   // reusable later (e.g. from a banner)
+
+            popup.addEventListener('click', function (e) {
+                if (e.target === popup || e.target.closest('[data-ol-close]')) close();
+                if (e.target.closest('[data-ol-hide-today]')) {
+                    var midnight = new Date(); midnight.setHours(24, 0, 0, 0);
+                    try { localStorage.setItem(KEY, String(midnight.getTime())); } catch (err) {}
+                    close();
+                }
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && popup.classList.contains('ol-open')) close();
+            });
+
+            // Auto-open unless the event is over or the visitor chose "오늘 하루 보지 않기"
+            var force = /[?&]openlab=1\b/.test(location.search);
+            if (!force && new Date() > END) return;
+            if (!force) {
+                try {
+                    var until = parseInt(localStorage.getItem(KEY), 10);
+                    if (until && Date.now() < until) return;
+                } catch (e) {}
+            }
+            setTimeout(open, 400);
+        })();
+    </script>
+    <!-- ============ /OpenLab 2026 popup ============ -->
+
     <div w3-include-html="footer.html"></div>
 
     <!--   Core JS Files   -->
