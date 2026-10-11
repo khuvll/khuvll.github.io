@@ -16,53 +16,189 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="./assets/css/material-kit.css?v=2.0.2">
 
-    <!-- Global CSS Variables -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap">
+
     <style>
+        /* ===== Tokens (shared with index.html) ===== */
         :root {
-            --section-title-font-size: x-large; /* 섹션 제목 폰트 크기 (40px) */
-            --section-title-font-weight: 900; /* 섹션 제목 폰트 굵기 (bold 설정) */
-            --section-margin: -2em; /* 섹션 간 간격 */
-            --image-width: 80%; /* 이미지 너비 */
-            --image-margin-bottom: 0.8em; /* 이미지 하단 간격 */
-            --text-font-size: large; /* 텍스트 크기 */
-            --text-font-weight: 600; /* 텍스트 굵기 */
-            --section-title-bg: #f0f0f0; /* 섹션 제목 배경색 */
-            --section-title-padding: 0.5em; /* 섹션 제목 여백 */
+            --vll-navy: #1a2845;
+            --vll-navy-deep: #0e1424;
+            --vll-red: #c0392b;
+            --vll-gold: #ffd166;
+            --vll-ink: #2c2c2c;
+            --vll-muted: #6b7280;
+            --vll-line: #e6e8ee;
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
         }
 
-        .section {
-            margin-bottom: var(--section-margin); /* 섹션 간 간격 */
+        /* ===== Navbar: same solid white bar as index.html ===== */
+        .navbar.navbar-transparent,
+        .navbar.navbar-transparent.bg-transparent,
+        .navbar {
+            padding-top: 12px !important;
+            padding-bottom: 12px !important;
+            background: rgba(255, 255, 255, 0.96) !important;
+            -webkit-backdrop-filter: saturate(180%) blur(12px);
+            backdrop-filter: saturate(180%) blur(12px);
+            box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
         }
+        .navbar .navbar-nav { align-items: center; }
+        .navbar .navbar-nav .nav-item .nav-link {
+            color: #2c2c2c !important;
+            font-weight: 500;
+            font-size: 0.86rem;
+            letter-spacing: 0.4px;
+            padding: 10px 12px !important;
+            white-space: nowrap;
+        }
+        .navbar .navbar-nav .nav-item .nav-link:hover,
+        .navbar .navbar-nav .nav-item .nav-link:focus { color: var(--vll-red) !important; background: transparent !important; }
+        .navbar .navbar-brand img { max-height: 42px; width: auto; }
+        .navbar .navbar-toggler-icon { background-color: #2c2c2c !important; }
+        .navbar.fixed-top { transform: none !important; opacity: 1 !important; visibility: visible !important; }
 
-        .section + .section {
-            margin-top: -5em; /* 다음 섹션 타이틀과 이전 섹션 마지막 글자 간격 줄이기 */
-        }
-
-        .section .title {
-            background-color: var(--section-title-bg);
-            padding: var(--section-title-padding);
-            margin-bottom: 1em;
-            text-align: center;
-            font-size: var(--section-title-font-size) !important; /* 강제 적용 */
-            font-weight: var(--section-title-font-weight) !important; /* 강제 적용 */
-        }
-        .row {
+        /* ===== Page head: title + theme links, then the talk ===== */
+        .research-body .title { margin-bottom: 0; }
+        .page-head {
             display: flex;
-            justify-content: space-around;
-            align-items: center; /* 텍스트와 이미지의 높이 맞추기 */
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px 24px;
+            border-bottom: 1px solid var(--vll-line);
+            padding-bottom: 14px;
+            margin-bottom: 40px;
         }
-        .section img {
-            width: var(--image-width); /* 이미지 너비 */
-            height: auto; /* 이미지 비율 유지 */
-            margin-bottom: var(--image-margin-bottom); /* 이미지와 텍스트 간 간격 */
+        .page-head h1 {
+            font-family: var(--font-display);
+            font-variation-settings: "opsz" 72;
+            font-weight: 500;
+            font-size: 2.3rem;
+            line-height: 1.1;
+            color: var(--vll-navy);
+            margin: 0;
         }
-        
-        .col-md-6 p {
-            margin-bottom: 1.2em; /* 텍스트와 다음 이미지 간격 추가 */
+        .theme-links { display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 0; padding: 0; list-style: none; }
+        .theme-links a {
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--vll-red);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 1px;
         }
-        .section p {
-            font-size: var(--text-font-size); /* 텍스트 크기 */
-            font-weight: var(--text-font-weight); /* 텍스트 굵기 */
+        .theme-links a:hover, .theme-links a:focus-visible { border-bottom-color: var(--vll-red); outline: none; }
+        .talk { max-width: 860px; margin: 0 auto 56px; }
+        .talk-video {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: var(--vll-navy-deep);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 18px 44px rgba(26,40,69,0.22);
+        }
+        .talk-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .talk-caption { margin: 12px 0 0; text-align: center; font-size: 0.9rem; color: var(--vll-muted); }
+        .talk-caption a { color: var(--vll-red); text-decoration: none; }
+        .talk-caption a:hover { text-decoration: underline; }
+
+        /* ===== Body ===== */
+        .research-body { padding: 8px 0 24px; }
+
+        .theme { padding: 40px 0 48px; scroll-margin-top: 96px; }
+        .theme + .theme { border-top: 1px solid var(--vll-line); }
+        .theme-head { max-width: 760px; margin-bottom: 28px; }
+        .theme-head h2 {
+            font-family: var(--font-display);
+            font-variation-settings: "opsz" 48;
+            font-weight: 500;
+            font-size: 1.85rem;
+            line-height: 1.2;
+            color: var(--vll-navy);
+            margin: 0 0 0.3em;
+        }
+        .theme-head h2::before {
+            content: "";
+            display: block;
+            width: 36px; height: 3px;
+            background: var(--vll-red);
+            margin-bottom: 18px;
+        }
+        .theme-head p {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            line-height: 1.55;
+            color: var(--vll-ink);
+            margin: 0;
+        }
+
+        /* ===== Paper cards ===== */
+        .paper-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+        .paper {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none !important;
+            color: inherit !important;
+            border: 1px solid var(--vll-line);
+            border-radius: 6px;
+            background: #fff;
+            overflow: hidden;
+            transition: border-color 160ms ease;
+        }
+        .paper:hover, .paper:focus-visible { border-color: var(--vll-navy); outline: none; }
+        .paper:focus-visible { box-shadow: 0 0 0 3px rgba(26,40,69,0.25); }
+        .paper-thumb {
+            aspect-ratio: 16 / 10;
+            background: #f3f4f7;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid var(--vll-line);
+        }
+        .paper-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .paper-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+        .paper-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+        .paper-name {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--vll-navy);
+        }
+        .paper-venue {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--vll-muted);
+            white-space: nowrap;
+        }
+        .paper-venue .award {
+            color: var(--vll-red);
+        }
+        .paper-title {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            line-height: 1.45;
+            color: var(--vll-ink);
+            margin: 0;
+        }
+
+        @media (max-width: 991px) {
+            .paper-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 575px) {
+            .paper-grid { grid-template-columns: minmax(0, 1fr); }
+            .theme-head h2 { font-size: 1.55rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .paper { transition: none; }
         }
     </style>
 </head>
@@ -84,156 +220,201 @@
     </div>
 
     <div class="main main-raised">
-        <div class="container">
-            <div class="title" style="margin-bottom: var(--section-margin);">
-                <h4 style="font-size: xx-large; font-weight: 900;">Research Interest</h4>
-                <hr>
-            </div>
-
-            <!-- Video Understanding Section -->
-            <div class="section">
-                <div class="title">
-                    <h4 style="font-size: var(--section-title-font-size); font-weight: var(--section-title-font-weight);"></h4>Video Understanding</h4>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/video_representation_learning.png" alt="Video Representation Learning">
-                        <p>Video Representation Learning</p>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/cross-modal_video_captioning.png" alt="Long-Term Temporal Context Modeling">
-                        <p>Video Captioning</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/long-term_context_modeling.png" alt="Long-Term Temporal Context Modeling">
-                        <p>Long-Term Temporal Context Modeling</p>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/sean_unsean_disentangle.png" alt="Human Action Recognition">
-                        <p>Human Action Recognition</p>
-                    </div>
-                </div>
-            </div>
-
-                <!-- Multi-Modal Learning Section -->
-            <div class="section">
-                <div class="title">
-                    <h4 style="font-size: var(--section-title-font-size); font-weight: var(--section-title-font-weight);"></h4>Multi-Modal Learning</h4>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/ca2st.png" alt="Visual + Audio + Text">
-                        <p>Visual + Audio</p>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/2025_CVPR_MASH-VLM.png" alt="Visual + Audio + Text">
-                        <p>Visual Language Model</p>
-                    </div>
-                </div>
-            </div>
-                <!--  Explainability Section -->
-            <div class="section">
-                <div class="title">
-                    <h4 style="font-size: var(--section-title-font-size); font-weight: var(--section-title-font-weight);"></h4> Explainability</h4>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-
-                        <img src="assets/img/pub/NeurIPS_2025_DANCE.gif" alt="Visual + Audio">
-                        <p>Explainable Video Understanding</p>
-
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <img src="assets/img/research/PCEVE.png" alt="Visual + Audio + Text">
-                        <p>Explainable Healthcare AI</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Adaptation/Robustness Section -->
-            <div class="section">
-                <div class="title">
-                    <h4 style="font-size: var(--section-title-font-size); font-weight: var(--section-title-font-weight);"></h4>Adaptation/Robustness</h4>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/un_self_supervised_learning.png" alt="Unsupervised Domain Adaptation">
-                        <p>Unsupervised Domain Adaptation</p>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <img src="/assets/img/research/continual_learning.png" alt="Continual Learning">
-                        <p>Continual Learning</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/2024_ICPR_MTID.png" alt="Domain Generalization">
-                        <p>Domain Generalization</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Learning with Limited Supervision Section -->
-            <div class="section">
-                <div class="title">
-                    <h4 style="font-size: var(--section-title-font-size); font-weight: var(--section-title-font-weight);"></h4>Learning with Limited Supervision</h4>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <img src="assets/img/pub/2024_ICPR_MTID.png" alt="Unsupervised/Self-Supervised Learning">
-                        <p>Unsupervised/Self-Supervised Learning</p>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/semi_supervised_learning.png" alt="Semi-Supervised Learning">
-                        <p>Semi-Supervised Learning</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <img src="./assets/img/research/category_discovery.png" alt="Category Discovery">
-                        <p>Category Discovery</p>
-                    </div>
-                </div>
-            </div>
-
-            
-        
-
-            <!-- <h5 style="margin-top: 1em; margin-bottom: 0.5em; font-weight: 400;">For Korean students</h5>
-            <li>Refer to the <a href="https://www.gist.ac.kr/gadm/html/sub04/0401.html?mode=V&no=197636" target="_new">school's application direction</a></li>
-            <li>Contact the <a href="mailto:jhc@gist.ac.kr">faculty</a> with your CV and transcript</li>
-            <li><span style="font-weight: 500;">We highly encourage you to do internship with us.</span> (remote or on-site)</li>
-
-            <h5 style="margin-top: 1em; margin-bottom: 0.5em; font-weight: 400;">For internation students</h5>
-            <li>Contact the <a href="mailto:jhc@gist.ac.kr">faculty</a> with your CV and transcript</li>
-            <li>Start the <a href="https://service.gist.ac.kr/admission/graduate/foreigner" target="_new">school's application</a></li> -->
-
-            <!-- <h5><i class="fa fa-bullhorn" aria-hidden="true"></i> &nbsp;
-                We currently have following paid-internship positions.
-            </h5>
-
-            <h5 style="margin-top: -0.5em; font-size: medium; font-weight: 400;">
-                <ul class="fa-ul">
-                    <li style="list-style-type: decimal;"><a href="https://docs.google.com/document/d/e/2PACX-1vRlMgFr8JNHBY-3Ir7tog1pHVGKwkaZO3Xm3PT8rhngwwh0oe556gsLCSyiAWYjJ-wqCJGpxyg1_89A/pub" target="_new">Using contrastive learning framework to train better binary neural networks/regular CNNs</a> <font style="font-size: 15px; font-weight: 400;">[2020/09]</font></li>
+        <div class="container research-body">
+            <div class="page-head">
+                <h1>Research</h1>
+                <ul class="theme-links">
+                    <li><a href="#robust-structure">Robust Structure</a></li>
+                    <li><a href="#relations-compositions">Relations &amp; Compositions</a></li>
+                    <li><a href="#internal-understanding">Internal Understanding</a></li>
+                    <li><a href="#long-horizon-memory">Long-Horizon Memory</a></li>
                 </ul>
-            </h5> -->
+            </div>
 
-            <!-- <h5 style="margin-bottom: 0.5em; font-weight: 400;">For GIST students</h5>
-            <li>Either on-site or remote.</li>
-            <li>Paid/Non-paid will be determined based on your experience in CV/ML.</li>
-            <li>Contact the <a href="mailto:jhc@gist.ac.kr">faculty</a> with your CV and transcript.</li>
-            <ul> <i class="fa fa-check"></i> &nbsp; In the email, please let us know if you have any projects in mind that we're currently working on.</ul>
+            <div class="talk">
+                <div class="talk-video">
+                    <iframe src="https://www.youtube.com/embed/LsOlO7fZ0YU" title="KHU Vision and Learning Lab research overview"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <p class="talk-caption">Research overview talk. Each paper below opens its entry on the <a href="pub.html">Publications</a> page.</p>
+            </div>
 
-            <h5 style="margin-bottom: 0.5em; font-weight: 400;">For Non-GIST domenstic students</h5>
-            <li>Remote only.</li>
-            <li>Paid/Non-paid will be determined based on your experience in CV/ML. If you have strong background in CV/ML or programming (e.g., ACM ICPC contest winners), you'll have a very high chance to work with us. Please specify these if you have any.</li>
-            <li>Contact the <a href="mailto:jhc@gist.ac.kr">faculty</a> with your CV and transcript</li>
-            <ul> <i class="fa fa-check"></i> &nbsp; In the email, please let us know if you have any projects in mind that we're currently working on.</ul>
+            <section class="theme" id="robust-structure">
+                <div class="theme-head">
+                    <h2>Robust Structure</h2>
+                    <p>What should a model represent about a dynamic world?</p>
+                </div>
+                <div class="paper-grid">
+                    <a class="paper" href="pub.html#pub-cast">
+                        <div class="paper-thumb"><img src="assets/img/pub/CAST_fig_2.png" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">CAST</span>
+                                <span class="paper-venue">NeurIPS 2023</span>
+                            </div>
+                            <p class="paper-title">CAST: Cross-Attention in Space and Time for Video Action Recognition</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-ca2st">
+                        <div class="paper-thumb"><img src="assets/img/pub/2025_TPAMI_CA2ST.png" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">CA<sup>2</sup>ST</span>
+                                <span class="paper-venue">TPAMI 2026</span>
+                            </div>
+                            <p class="paper-title">CA<sup>2</sup>ST: Cross-Attention in Audio, Space, and Time for Holistic Video Recognition</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-devias">
+                        <div class="paper-thumb"><img src="assets/img/pub/DEVIAS_thumbnail.gif" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">DEVIAS</span>
+                                <span class="paper-venue">ECCV 2024 <span class="award">Oral</span></span>
+                            </div>
+                            <p class="paper-title">DEVIAS: Learning Disentangled Video Representations of Action and Scene</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
 
-            <h5 style="margin-bottom: 0.5em; font-weight: 400;">For interanational students with Global Internship Program</h5>
-            <li>Contact the <a href="mailto:jhc@gist.ac.kr">faculty</a> with your CV and transcript</li> -->
+            <section class="theme" id="relations-compositions">
+                <div class="theme-head">
+                    <h2>Relations and Compositions</h2>
+                    <p>Why do models fail when the world changes or recombines?</p>
+                </div>
+                <div class="paper-grid">
+                    <a class="paper" href="pub.html#pub-mash-vlm">
+                        <div class="paper-thumb"><img src="assets/img/pub/2025_CVPR_MASH-VLM.png" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">MASH-VLM</span>
+                                <span class="paper-venue">CVPR 2025 <span class="award">Highlight</span></span>
+                            </div>
+                            <p class="paper-title">MASH-VLM: Mitigating Action-Scene Hallucination in Video-LLMs through Disentangled Spatial-Temporal Representations</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-rcore">
+                        <div class="paper-thumb"><img src="assets/img/pub/ECCV_2026_RCORE_2.gif" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">RCORE</span>
+                                <span class="paper-venue">ECCV 2026</span>
+                            </div>
+                            <p class="paper-title">Why Can't I Open My Drawer? Mitigating Object-Driven Shortcuts in Zero-Shot Compositional Action Recognition</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-modirect">
+                        <div class="paper-thumb"><img src="assets/img/pub/2026_NeurIPS_MoDirect.gif" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">MoDirect</span>
+                                <span class="paper-venue">NeurIPS 2026</span>
+                            </div>
+                            <p class="paper-title">Which Way Did It Move? Diagnosing and Overcoming Directional Motion Blindness in Video-LLMs</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="theme" id="internal-understanding">
+                <div class="theme-head">
+                    <h2>Internal Understanding</h2>
+                    <p>How can we tell what structure the model actually uses?</p>
+                </div>
+                <div class="paper-grid">
+                    <a class="paper" href="pub.html#pub-dance">
+                        <div class="paper-thumb"><img src="assets/img/pub/NeurIPS_2025_DANCE.gif" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">DANCE</span>
+                                <span class="paper-venue">NeurIPS 2025 <span class="award">Spotlight</span></span>
+                            </div>
+                            <p class="paper-title">Disentangled Concepts Speak Louder Than Words: Explainable Video Action Recognition</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-trace">
+                        <div class="paper-thumb"><img src="assets/img/pub/2026_NeurIPS_TraCE.jpg" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">TraCE</span>
+                                <span class="paper-venue">NeurIPS 2026</span>
+                            </div>
+                            <p class="paper-title">TraCE: Trajectory-Aware Concepts for Explainable Video Understanding</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-evident">
+                        <div class="paper-thumb"><img src="assets/img/pub/2026_NeurIPS_Evident.jpg" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">EVIDENT</span>
+                                <span class="paper-venue">NeurIPS 2026</span>
+                            </div>
+                            <p class="paper-title">EVIDENT: Routing MLLM Adaptation through Entity-Grounded Visual Evidence for Cross-Domain Video Temporal Grounding</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="theme" id="long-horizon-memory">
+                <div class="theme-head">
+                    <h2>Long-Horizon Memory</h2>
+                    <p>How do we access the right information over long horizons?</p>
+                </div>
+                <div class="paper-grid">
+                    <a class="paper" href="pub.html#pub-essential">
+                        <div class="paper-thumb"><img src="assets/img/pub/ESSENTIAL.png" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">ESSENTIAL</span>
+                                <span class="paper-venue">ICCV 2025 <span class="award">Highlight</span></span>
+                            </div>
+                            <p class="paper-title">ESSENTIAL: Episodic and Semantic Memory Integration for Video Class-Incremental Learning</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-hero-vql">
+                        <div class="paper-thumb"><img src="assets/img/pub/BMVC2025_HERO-VQL.jpg" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">HERO-VQL</span>
+                                <span class="paper-venue">BMVC 2025 <span class="award">Oral</span></span>
+                            </div>
+                            <p class="paper-title">HERO-VQL: Hierarchical, Egocentric and Robust Visual Query Localization</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-cm2">
+                        <div class="paper-thumb"><img src="assets/img/pub/DoYouRemenber.png" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">CM<sup>2</sup></span>
+                                <span class="paper-venue">CVPR 2024</span>
+                            </div>
+                            <p class="paper-title">Do You Remember? Dense Video Captioning with Cross-Modal Memory Retrieval</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-hicm2">
+                        <div class="paper-thumb"><img src="assets/img/pub/hicm2.png" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">HiCM<sup>2</sup></span>
+                                <span class="paper-venue">AAAI 2025</span>
+                            </div>
+                            <p class="paper-title">HiCM<sup>2</sup>: Hierarchical Compact Memory Modeling for Dense Video Captioning</p>
+                        </div>
+                    </a>
+                    <a class="paper" href="pub.html#pub-request">
+                        <div class="paper-thumb"><img src="assets/img/pub/2026_ECCV_REQUEST.png" alt="" loading="lazy"></div>
+                        <div class="paper-body">
+                            <div class="paper-head">
+                                <span class="paper-name">ReQuest</span>
+                                <span class="paper-venue">ECCV 2026</span>
+                            </div>
+                            <p class="paper-title">ReQuest: Rethinking-based Question-Aware Frame Selection for Long-Form Video QA</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
 
         </div>
     </div>
