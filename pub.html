@@ -58,6 +58,7 @@
       .card-links { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
       .card-links a { display: inline-block; padding: 4px 0; }
 
+      .pub-legend-row { margin: 48px 0 -40px; }
       .pub-legend { font-size: 0.8rem; color: #666; display: inline-block; margin: 0.3em 1.2em 0 0; }
       .year-pub { font-size: 24px; font-weight: bold; margin-top: 72px; margin-bottom: 24px; color: #333; }
       .year-pub:first-of-type { margin-top: 40px; }
@@ -72,6 +73,61 @@
       @keyframes pubTargetFade {
           0%   { box-shadow: 0 0 0 3px rgba(26, 40, 69, 0.75); }
           100% { box-shadow: 0 0 0 3px rgba(26, 40, 69, 0.0); }
+      }
+
+      /* 학생 1저자 submission accept rate (슬라이드와 동일한 구성) */
+      .acc-section { margin: 24px 0 6px; font-family: Arial, Helvetica, sans-serif; color: #000; }
+      .acc-section p { margin: 0; }
+      .acc-eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; }
+      .acc-heading { font-family: Arial, Helvetica, sans-serif; font-size: 25.5px; font-weight: 700; color: #000; margin: 15px 0 7.5px; line-height: 1.2; }
+      .acc-sub { font-size: 13px; }
+      .acc-rule { border: 0; border-top: 1px solid #dbe6ee; margin: 13.5px 0 13.5px; }
+      .acc-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 13.5px; }
+      .acc-card { background: #f1f6f9; border-radius: 10.5px; padding: 15px 15px 12px; }
+      .acc-card-label { font-size: 12px; font-weight: 700; text-transform: uppercase; }
+      .acc-card-main { display: grid; grid-template-columns: 1fr 1fr; align-items: center; margin: 3px 0 6px; }
+      .acc-num { font-size: 48px; font-weight: 700; line-height: 1.15; font-variant-numeric: tabular-nums; }
+      .acc-frac { font-size: 14px; line-height: 1.5; }
+      .acc-tags { font-size: 12px; }
+      .acc-detail { display: grid; grid-template-columns: 2.2fr 1fr; margin-top: 22.5px; }
+      .acc-chart { padding-right: 18px; }
+      .acc-chart-title { font-size: 15px; font-weight: 700; margin-bottom: 9px !important; }
+      .acc-bar-row, .acc-axis { display: grid; grid-template-columns: 82.5px minmax(0, 1fr) 67.5px 33px; align-items: center; column-gap: 15px; }
+      .acc-bar-row { height: 37.5px; }
+      .acc-bar-row .conf { font-size: 13.5px; font-weight: 700; }
+      .acc-bar-track { position: relative; height: 100%; display: flex; align-items: center;
+          background-image: linear-gradient(to right, #dbe6ee 1px, transparent 1px);
+          background-size: 25% 100%; border-right: 1px solid #dbe6ee; }
+      .acc-bar-fill { height: 16.5px; background: #1f77b4; }
+      .acc-bar-row .pct { font-size: 13.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
+      .acc-bar-row .cnt { font-size: 11px; font-variant-numeric: tabular-nums; }
+      .acc-axis-ticks { position: relative; height: 16.5px; font-size: 10px; margin-top: 4.5px; }
+      .acc-axis-ticks span { position: absolute; transform: translateX(-50%); }
+      .acc-axis-caption { font-size: 11px; text-align: center; margin-top: 3px !important; }
+      .acc-outcomes { border-left: 1px solid #dbe6ee; padding: 10.5px 0 0 22.5px; }
+      .acc-outcomes-title { font-size: 12px; font-weight: 700; text-transform: uppercase; }
+      .acc-outcome-line { font-size: 18px; font-weight: 700; margin: 22.5px 0 25.5px !important; white-space: nowrap; }
+      .acc-section .hl { color: #f00; font-weight: 700; }
+      .acc-outcome-desc { font-size: 13px; line-height: 1.4; }
+      .acc-journeys { font-size: 12px; margin-top: 30px !important; }
+      .acc-note { font-size: 11px; line-height: 1.8; }
+
+      @media (max-width: 991.98px) {
+          .acc-detail { grid-template-columns: 1fr; }
+          .acc-chart { padding-right: 0; }
+          .acc-outcomes { border-left: 0; border-top: 1px solid #dbe6ee; padding: 15px 0 0; margin-top: 15px; }
+          .acc-outcome-line { margin: 10.5px 0 12px !important; }
+          .acc-journeys { margin-top: 12px !important; }
+      }
+      @media (max-width: 767.98px) {
+          .acc-cards { grid-template-columns: 1fr; }
+          .acc-heading { font-size: 19.5px; }
+          .acc-num { font-size: 36px; }
+          .acc-bar-row, .acc-axis { grid-template-columns: 48px minmax(0, 1fr) 40.5px 22.5px; column-gap: 6px; }
+          .acc-bar-row { height: 30px; }
+          .acc-bar-row .conf, .acc-bar-row .pct { font-size: 12px; }
+          .acc-bar-fill { height: 12px; }
+          .acc-outcome-line { font-size: 15.8px; white-space: normal; }
       }
 
       /* 태블릿: 썸네일 조금 작게 */
@@ -125,9 +181,66 @@
               <h4 style="font-size: xx-large; font-weight: 900;">Publications</h4>
                 <!-- <h3>Publications</h3> -->
                 <hr>
-                <span class="pub-legend">Boldfaced names indicate VLL members</span>
-                <span class="pub-legend">† indicates equally contributed first authors</span>
-                <span class="pub-legend">* indicates corresponding author(s)</span><br>
+            </div>
+
+            <!-- KHU VLL 학생 1저자 submission accept rate -->
+            <div class="acc-section">
+              <p class="acc-eyebrow">KHU VLL&nbsp; / &nbsp;Student-Led Research</p>
+              <h5 class="acc-heading">High acceptance. Persistence through revision.</h5>
+              <p class="acc-sub">KHU VLL student-first-authored submissions &nbsp;|&nbsp; PI: Jinwoo Choi &nbsp;|&nbsp; Submission record: 2023–2026</p>
+              <hr class="acc-rule">
+
+              <div class="acc-cards">
+                <div class="acc-card">
+                  <p class="acc-card-label">Submission-Level Acceptance</p>
+                  <div class="acc-card-main">
+                    <span class="acc-num">60.0%</span>
+                    <span class="acc-frac">9 accepted /<br>15 submission attempts</span>
+                  </div>
+                  <p class="acc-tags">NeurIPS · CVPR · ICCV · ECCV</p>
+                </div>
+                <div class="acc-card">
+                  <p class="acc-card-label">Eventual Acceptance After Revision</p>
+                  <div class="acc-card-main">
+                    <span class="acc-num">100%</span>
+                    <span class="acc-frac">4 of 4 revised<br>projects shown</span>
+                  </div>
+                  <p class="acc-tags">DEVIAS · ESSENTIAL · HERO-VQL· RCORE</p>
+                </div>
+              </div>
+
+              <div class="acc-detail">
+                <div class="acc-chart">
+                  <p class="acc-chart-title">Acceptance by conference</p>
+                  <div class="acc-bar-row"><span class="conf">ECCV</span><div class="acc-bar-track"><div class="acc-bar-fill" style="width: 100%;"></div></div><span class="pct">100.0%</span><span class="cnt">2 / 2</span></div>
+                  <div class="acc-bar-row"><span class="conf">NeurIPS</span><div class="acc-bar-track"><div class="acc-bar-fill" style="width: 83.3%;"></div></div><span class="pct">83.3%</span><span class="cnt">5 / 6</span></div>
+                  <div class="acc-bar-row"><span class="conf">ICCV</span><div class="acc-bar-track"><div class="acc-bar-fill" style="width: 50%;"></div></div><span class="pct">50.0%</span><span class="cnt">1 / 2</span></div>
+                  <div class="acc-bar-row"><span class="conf">CVPR</span><div class="acc-bar-track"><div class="acc-bar-fill" style="width: 20%;"></div></div><span class="pct">20.0%</span><span class="cnt">1 / 5</span></div>
+                  <div class="acc-axis">
+                    <span></span>
+                    <div class="acc-axis-ticks"><span style="left: 0%;">0%</span><span style="left: 25%;">25%</span><span style="left: 50%;">50%</span><span style="left: 75%;">75%</span><span style="left: 100%;">100%</span></div>
+                    <span></span><span></span>
+                  </div>
+                  <p class="acc-axis-caption">Acceptance rate &nbsp;·&nbsp; accepted / submitted shown at right</p>
+                </div>
+                <div class="acc-outcomes">
+                  <p class="acc-outcomes-title">Revision Outcomes</p>
+                  <p class="acc-outcome-line">2 <span class="hl">Oral</span> + 1 <span class="hl">Highlight</span> + 1 Poster</p>
+                  <p class="acc-outcome-desc">All four featured projects reached acceptance and three projects got an <span class="hl">Oral</span> or <span class="hl">Highlight</span> presentation.</p>
+                  <p class="acc-journeys">See the four revision journeys →</p>
+                </div>
+              </div>
+
+              <hr class="acc-rule">
+              <p class="acc-note">9/15 counts submission attempts; 4/4 counts the revised projects named above. These are different denominators.<br>
+                Source: KHU VLL internal log and PI-provided histories. External/PI-first-author papers excluded. BMVC appears only in revision outcomes.</p>
+            </div>
+
+            <!-- 논문 리스트 표기 설명 -->
+            <div class="pub-legend-row">
+              <span class="pub-legend">Boldfaced names indicate VLL members</span>
+              <span class="pub-legend">† indicates equally contributed first authors</span>
+              <span class="pub-legend">* indicates corresponding author(s)</span>
             </div>
 
 <!--             
