@@ -83,6 +83,17 @@
           margin-bottom: 30px;
           color: #333;
       }
+      /* anchor targets from research.html */
+      .card[id^="pub-"] { scroll-margin-top: 110px; }
+      .card[id^="pub-"]:target .card-body {
+          box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.45);
+          border-radius: 6px;
+          animation: pubTargetFade 2.5s ease-out forwards;
+      }
+      @keyframes pubTargetFade {
+          0%   { box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.75); }
+          100% { box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.0); }
+      }
   </style>
   
 </head>
@@ -127,7 +138,7 @@
             2026
           </div>
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-modirect" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/2026_NeurIPS_MoDirect.gif" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -148,7 +159,7 @@
             </div> 
           </div>
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-trace" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/2026_NeurIPS_TraCE.jpg" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -163,7 +174,7 @@
             </div> 
           </div>
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-evident" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/2026_NeurIPS_Evident.jpg" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -179,7 +190,7 @@
             </div> 
           </div>
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-rcore" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/ECCV_2026_RCORE_2.gif" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -201,7 +212,7 @@
             </div> 
           </div>
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-request" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/2026_ECCV_REQUEST.png" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -241,7 +252,7 @@
 
 
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-ca2st" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/2025_TPAMI_CA2ST.png" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -265,7 +276,7 @@
             2025
           </div>
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-dance" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/NeurIPS_2025_DANCE.gif" width=120px height = 120px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -286,7 +297,7 @@
           
 
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-hero-vql" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/BMVC2025_HERO-VQL.jpg" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -308,7 +319,7 @@
           
             
         <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-essential" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/ESSENTIAL.png" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -358,7 +369,7 @@
           </div> 
 
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-mash-vlm" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/2025_CVPR_MASH-VLM.png" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -403,7 +414,7 @@
           </div> 
           
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-hicm2" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/hicm2.png" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -466,7 +477,7 @@
           </div> 
 
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-devias" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <!-- <img class="card-pic-left" src="assets/img/pub/ECCV_2024_DEVIAS.gif" width=130px height=90px style="margin:1em 2em 1em -1em"> -->
                 <!-- <video class="card-pic-left" width="130px" height="90px" style="margin:1em 2em 1em -1em; flex-shrink: 0;" controls>
@@ -529,7 +540,7 @@
           </div> 
           
           <div class="row-pub all">
-            <div class="card" style="width: 97%;">
+            <div class="card" id="pub-cm2" style="width: 97%;">
               <div class="card-body" style="background-color: rgb(253, 253, 253);">
                 <img class="card-pic-left" src="assets/img/pub/DoYouRemenber.png" width=130px height=90px style="margin:1em 2em 1em -1em">
                 <div class="card-content">
@@ -574,7 +585,7 @@
           </div>
 
             <div class="row-pub all">
-              <div class="card" style="width: 97%;">
+              <div class="card" id="pub-cast" style="width: 97%;">
                 <div class="card-body" style="background-color: rgb(253, 253, 253);">
                   <img class="card-pic-left" src="assets/img/pub/CAST_fig_2.png" width=120px height=90px style="margin:1em 2em 1em 0em">
                   <div class="card-content">
