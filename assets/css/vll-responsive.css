@@ -1,0 +1,50 @@
+/* ==========================================================================
+   KHU VLL — shared responsive rules
+   Loaded by every page after material-kit.css.
+   Breakpoints follow Bootstrap 4 (used by Material Kit):
+     < 576px  phone      576–767 large phone
+     768–991 tablet      ≥ 992   desktop
+   ========================================================================== */
+
+/* ---- Safety net: nothing may widen the page --------------------------- */
+html, body { overflow-x: clip; }
+img, video, iframe, svg { max-width: 100%; }
+img { height: auto; }
+
+/* ---- Page frame ------------------------------------------------------- */
+/* Material Kit raises the white card 60px over the header and gives it 30px
+   side margins. On phones that leaves too little width for content. */
+@media (max-width: 767.98px) {
+  .main.main-raised { margin-left: 12px; margin-right: 12px; }
+  .main .container { padding-left: 16px; padding-right: 16px; }
+  .page-header2 { min-height: 40vh; }
+}
+@media (max-width: 575.98px) {
+  .main.main-raised { margin-left: 8px; margin-right: 8px; }
+  /* Page titles ("Publications", "Our Team", …) */
+  .main .title h4 { font-size: 1.7rem !important; }
+}
+
+/* ---- Card grid used by People / Courses / Grant ----------------------- */
+/* Replaces inline  style="width: 28%"  etc. Column count is set per grid
+   with a modifier class; everything collapses to one column on phones.  */
+.vll-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+}
+.vll-grid--2 { --cols: 2; }
+.vll-grid--3 { --cols: 3; }
+.vll-grid--4 { --cols: 4; }
+.vll-grid > .card { width: auto; margin: 0; }
+@media (max-width: 991.98px) {
+  .vll-grid--3, .vll-grid--4 { --cols: 2; }
+}
+@media (max-width: 575.98px) {
+  .vll-grid { --cols: 1 !important; gap: 14px; }
+}
+
+/* ---- Touch targets ---------------------------------------------------- */
+@media (hover: none) and (pointer: coarse) {
+  .card-links a, .card-link { padding: 8px 10px; }
+}
