@@ -94,7 +94,7 @@
             padding-bottom: 1px;
         }
         .theme-links a:hover, .theme-links a:focus-visible { border-bottom-color: var(--vll-red); outline: none; }
-        .talk { max-width: 860px; margin: 0 auto 56px; }
+        .talk { max-width: 860px; margin: 0 auto 44px; }
         .talk-video {
             position: relative;
             aspect-ratio: 16 / 9;
@@ -107,6 +107,36 @@
         .talk-caption { margin: 12px 0 0; text-align: center; font-size: 0.9rem; color: var(--vll-muted); }
         .talk-caption a { color: var(--vll-red); text-decoration: none; }
         .talk-caption a:hover { text-decoration: underline; }
+
+        /* ===== Research statement (between the talk and the themes) ===== */
+        .statement {
+            max-width: 780px;
+            margin: 0 auto 8px;
+            padding: 8px 0 36px;
+            border-bottom: 1px solid var(--vll-line);
+        }
+        .statement h2 {
+            font-family: var(--font-display);
+            font-variation-settings: "opsz" 48;
+            font-weight: 500;
+            font-size: 1.85rem;
+            line-height: 1.2;
+            color: var(--vll-navy);
+            margin: 0 0 0.6em;
+        }
+        .statement p {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--vll-ink);
+            margin: 0 0 1em;
+        }
+        .statement p:last-child { margin-bottom: 0; }
+        .statement strong { font-weight: 600; color: var(--vll-navy); }
+        @media (max-width: 575.98px) {
+            .statement h2 { font-size: 1.55rem; }
+            .statement p { font-size: 1rem; }
+        }
 
         /* ===== Body ===== */
         .research-body { padding: 8px 0 24px; }
@@ -240,6 +270,12 @@
                 </div>
                 <p class="talk-caption">Research overview talk. Each paper below opens its entry on the <a href="pub.html">Publications</a> page.</p>
             </div>
+
+            <section class="statement">
+                <h2>Trustworthy Spatiotemporal Intelligence</h2>
+                <p>We study how AI should understand a world that changes over time, working with video and multimodal data. Beyond benchmark accuracy, we ask how a model represents a dynamic world, whether it understands relations among objects and actions in situations it has never seen, what evidence it actually uses to decide, and how it remembers and retrieves what matters over long horizons.</p>
+                <p>We call this direction <strong>Trustworthy Spatiotemporal Intelligence</strong>, and we organize our work around the four questions below.</p>
+            </section>
 
             <section class="theme" id="robust-structure">
                 <div class="theme-head">
