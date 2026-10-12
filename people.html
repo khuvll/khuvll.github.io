@@ -43,8 +43,12 @@
         /* ---- People cards: grid instead of inline width:28% ---- */
         /* 아바타가 카드 위로 40px 튀어나오므로(material-kit .avatar margin-top:-40px)
            섹션 제목과의 간격, 카드 행 사이 간격을 그만큼 넉넉히 둔다 */
-        .people-grid { margin: 48px 0 40px; row-gap: 56px; column-gap: 20px; }
-        .people-grid > .card { align-self: start; }
+        .people-grid { margin: 48px 0 40px; row-gap: 60px; column-gap: 40px; }
+        /* 원본처럼 같은 줄의 카드는 같은 높이 (grid 기본 stretch) */
+        /* 데스크톱: 카드 폭을 원본(28%)과 비슷한 320px 로 제한, 왼쪽 정렬 */
+        @media (min-width: 992px) {
+            .people-grid { grid-template-columns: repeat(3, minmax(0, 320px)); justify-content: start; }
+        }
         .people-grid > .card { width: auto; margin: 0; }
         .people-grid .card-body { padding-top: 1.1rem; }
         .people-grid .card-title { margin-top: 0.4em; margin-bottom: 0.1em; }
@@ -65,7 +69,7 @@
             .card .author .avatar { width: 88px; height: 88px; }
         }
         @media (max-width: 575.98px) {
-            .people-grid { row-gap: 56px; margin-top: 44px; }
+            .people-grid { row-gap: 56px; column-gap: 20px; margin-top: 44px; }
             .people-grid .card-text { font-size: 0.9rem; }
             .people-section { font-size: 1.35rem; }
         }
